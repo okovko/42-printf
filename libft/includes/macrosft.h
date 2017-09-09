@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/09 04:43:07 by olkovale          #+#    #+#             */
-/*   Updated: 2017/08/07 00:20:52 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/08/16 16:48:21 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -426,6 +426,12 @@
 # define ISSPACE2(c) || c == '\r' || c == '\v' || c == '\f')
 # define ISDIGIT(c) (c >= '0' && c <= '9')
 # define ABS(x) ((x) < 0 ? -(x) : (x))
+
+# define BIT_FLAG(n) (~(~0u << 1) << (n - 1))
+# define BIT_FLAGS_MAX(n) (~(~0u << n))
+
+# define PSTR(x) #x
+# define STR(x) PSTR(x)
 
 typedef enum	e_bool
 {
