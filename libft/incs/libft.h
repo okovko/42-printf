@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 11:29:19 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/20 20:58:57 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/21 02:18:23 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,20 @@
 # define ISSPACE2(c) (c == '\r' || c == '\v' || c== '\f')
 # define ISDIGIT(c) (c >= '0' && c <= '9')
 # define ABS(x) ((x) < 0 ? -(x) : (x))
+
+typedef struct		s_map_kv
+{
+	void			*key;
+	void			*val;
+}					t_map_kv;
+
+typedef struct		s_map
+{
+	int				sz;
+	int				key_sz;
+	int				val_sz;
+	t_map_kv		*kvs;
+}					t_map;
 
 typedef struct		s_lst
 {
@@ -119,5 +133,13 @@ char				*ft_lststr(t_lst *ll);
 int					ft_lstszsum(t_lst *ll);
 int					get_next_scan(const char *buf, const char *dlm, char **out);
 int					get_next_buf(int fd, int sz, char **buf);
-
+t_map				*ft_mapnew(int sz, int key_sz, int val_sz);
+t_map				*ft_mapsgen(t_map *map, void *keys, void *vals);
+t_map				*ft_mapdgen(t_map *map, void *keys, void *vals);
+t_map_kv			*ft_mapget(t_map *map, void *key, int (*key_cmp)());
+t_map_kv			*ft_mapnget(t_map *map, void *key,
+								int (*keycmp)(void *, void *, size_t), int sz);
+int					ft_map_keycmp_str(void *s1, void *s2, size_t sz);
+int					ft_map_keycmp_strn(void *s1, void *s2, size_t sz);
+int					ft_map_keycmp_strnstr(void *str, void *query, size_t sz);
 #endif
