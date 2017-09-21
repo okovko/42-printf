@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/18 08:14:03 by olkovale          #+#    #+#             */
-/*   Updated: 2017/08/14 21:24:22 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/06 15:53:25 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,27 @@
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void const *content, size_t content_size)
+t_lst	*ft_lstnew(void const *dat, int sz)
 {
-	t_list	*link;
+	t_lst	*ll;
 
-	if ((link = (t_list *)malloc(sizeof(t_list))) == NULL)
+	if (NULL == (ll = (t_lst *)malloc(sizeof(*ll))))
 		return (NULL);
-	if ((link->content = malloc(content_size)) == NULL)
+	if (NULL == (ll->dat = malloc(sizeof(sz))))
 	{
-		free(link);
+		free(ll);
 		return (NULL);
 	}
-	if (content)
+	if (dat)
 	{
-		ft_memcpy(link->content, content, content_size);
-		link->content_size = content_size;
+		ft_memcpy(ll->dat, dat, sz);
+		ll->sz = sz;
 	}
 	else
 	{
-		link->content = NULL;
-		link->content_size = 0;
+		ll->dat = NULL;
+		ll->sz = 0;
 	}
-	link->next = NULL;
-	return (link);
+	ll->nxt = NULL;
+	return (ll);
 }

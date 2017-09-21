@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/27 23:15:17 by olkovale          #+#    #+#             */
-/*   Updated: 2017/06/21 19:08:37 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/06 12:54:05 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,25 @@
 
 #include "libft.h"
 
-char	*ft_itoa(int n)
+char	*ft_itoa(int val)
 {
-	char	*head;
-	char	*str;
+	char	*ss;
+	int		sz;
+	int		tmp;
 
-	if (!(str = malloc((n < 0) + ft_count_digits(n) + 1)))
+	sz = ft_diglen(val);
+	if (NULL == (ss = malloc(sz + 1)))
 		return (NULL);
-	head = str;
-	if (n < 0)
-		*str++ = '-';
-	*str++ = ABS(n % 10) + '0';
-	n /= 10;
-	while (n)
+	val < 0 ? ss[0] = '-' : (void)0;
+	val == 0 ? ss[0] = '0' : (void)0;
+	ss[sz] = '\0';
+	sz--;
+	tmp = val;
+	while (tmp)
 	{
-		*str++ = ABS(n % 10) + '0';
-		n /= 10;
+		ss[sz] = '0' + ABS(tmp % 10);
+		tmp /= 10;
+		sz--;
 	}
-	*str = '\0';
-	ft_strrev(*head == '-' ? head + 1 : head);
-	return (head);
+	return (ss);
 }

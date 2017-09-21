@@ -5,20 +5,22 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/05 09:45:09 by olkovale          #+#    #+#             */
-/*   Updated: 2017/08/21 21:20:56 by olkovale         ###   ########.fr       */
+/*   Created: 2017/09/06 16:06:47 by olkovale          #+#    #+#             */
+/*   Updated: 2017/09/06 16:06:47 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strchrnul(const char *str, char q)
-{
-	char	c;
+#include "libft.h"
 
-	while ((c = *str))
+char	*ft_strchrnul(const char *ss, char qry)
+{
+	char	cc;
+
+	while ((cc = *ss))
 	{
-		if (c == q)
-			return ((char *)str);
-		str++;
+		if (cc == qry)
+			return ((char *)ss);
+		ss++;
 	}
-	return ((char *)str);
+	return ((char *)ss);
 }

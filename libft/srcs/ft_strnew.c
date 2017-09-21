@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/11 06:53:54 by olkovale          #+#    #+#             */
-/*   Updated: 2017/08/13 01:05:39 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/06 14:56:26 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 #include "libft.h"
 
-char	*ft_strnew(size_t size)
+char	*ft_strnew(int sz)
 {
-	char	*str;
+	char	*ss;
 
-	if ((str = (char *)malloc(sizeof(char) * (size + 1))))
-		bzero(str, size + 1);
-	return (str);
+	if (NULL == (ss = malloc((sz + 1))))
+		return (NULL);
+	return (ft_memset(ss, 0, sz + 1));
 }

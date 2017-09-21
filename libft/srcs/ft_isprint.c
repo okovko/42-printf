@@ -6,13 +6,13 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 11:29:19 by olkovale          #+#    #+#             */
-/*   Updated: 2017/08/18 02:48:46 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/06 00:16:02 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_isprint(int c)
+int		ft_isprint(int cc)
 {
-	return (c >= ' ' && c <= '~');
+	return (cc >= ' ' && cc <= '~');
 }

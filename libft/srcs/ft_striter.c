@@ -5,17 +5,17 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/11 06:53:54 by olkovale          #+#    #+#             */
-/*   Updated: 2017/06/23 21:42:37 by olkovale         ###   ########.fr       */
+/*   Created: 2017/09/06 15:26:12 by olkovale          #+#    #+#             */
+/*   Updated: 2017/09/06 15:26:12 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_striter(char *s, void (*f)(char *))
+void	ft_stritr(char *ss, void (*ff)(char *))
 {
-	if (!s || !f)
+	if (NULL == ss || NULL == ff)
 		return ;
-	while (*s)
-		f(s++);
+	while (*ss)
+		ff(ss++);
 }

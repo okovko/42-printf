@@ -5,23 +5,24 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/18 08:15:10 by olkovale          #+#    #+#             */
-/*   Updated: 2017/08/13 16:07:22 by olkovale         ###   ########.fr       */
+/*   Created: 2017/09/06 05:48:56 by olkovale          #+#    #+#             */
+/*   Updated: 2017/09/06 15:53:35 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstiter(t_list *lst, void (*f)(t_list *elem))
+t_lst	*ft_lstiter(t_lst *ll, void (*ff)(t_lst *elm))
 {
-	t_list	*head;
+	t_lst	*beg;
 
-	NULLCHECK(lst, f);
-	head = lst;
-	while (lst)
+	if (!ll || !ff)
+		return (NULL);
+	beg = ll;
+	while (ll)
 	{
-		f(lst);
-		lst = lst->next;
+		ff(ll);
+		ll = ll->nxt;
 	}
-	return (head);
+	return (beg);
 }

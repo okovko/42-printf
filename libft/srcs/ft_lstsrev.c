@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/25 23:29:10 by olkovale          #+#    #+#             */
-/*   Updated: 2017/08/15 02:39:09 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/06 15:53:20 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,23 @@
 
 #include "libft.h"
 
-t_list	*ft_lstsrev(t_list **begin_list)
+t_lst	*ft_lstsrev(t_lst **ll)
 {
-	t_list	*prev;
-	t_list	*curr;
-	t_list	*next;
+	t_lst	*prv;
+	t_lst	*cur;
+	t_lst	*nxt;
 
-	NULLCHECK(begin_list);
-	prev = NULL;
-	curr = *begin_list;
-	while (curr)
+	if (NULL == ll)
+		return (NULL);
+	prv = NULL;
+	cur = *ll;
+	while (cur)
 	{
-		next = curr->next;
-		curr->next = prev;
-		prev = curr;
-		curr = next;
+		nxt = cur->nxt;
+		cur->nxt = prv;
+		prv = cur;
+		cur = nxt;
 	}
-	*begin_list = prev;
-	return (*begin_list);
+	*ll = prv;
+	return (*ll);
 }

@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/18 08:15:18 by olkovale          #+#    #+#             */
-/*   Updated: 2017/06/18 08:15:18 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/06 15:41:16 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include "libft.h"
 
-void	ft_putchar_fd(char c, int fd)
+void	ft_putchar_fd(char cc, int fd)
 {
-	write(fd, &c, 1);
+	write(fd, &cc, 1);
 }

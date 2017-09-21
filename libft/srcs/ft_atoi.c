@@ -6,24 +6,24 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 12:06:06 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/08 17:12:12 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/06 12:53:54 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_atoi(char *str)
+int		ft_atoi(char *ss)
 {
-	char	c;
+	char	cc;
 	int		neg_num;
-	int		neg;
+	t_bool	neg;
 
-	while ((c = *str) && ISSPACE(c))
-		str++;
-	neg = c == '-';
-	str += c == '-' || c == '+';
+	while ((cc = *ss) && ISSPACE(cc))
+		ss++;
+	neg = cc == '-';
+	ss += cc == '-' || cc == '+';
 	neg_num = 0;
-	while ((c = *str++) && ISDIGIT(c))
-		neg_num = neg_num * 10 - c + '0';
+	while ((cc = *ss++) && ISDIGIT(cc))
+		neg_num = neg_num * 10 - cc + '0';
 	return (neg ? neg_num : -neg_num);
 }

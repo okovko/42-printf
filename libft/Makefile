@@ -6,7 +6,7 @@
 #    By: olkovale <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/20 19:35:21 by olkovale          #+#    #+#              #
-#    Updated: 2017/07/11 18:46:45 by olkovale         ###   ########.fr        #
+#    Updated: 2017/09/07 20:54:23 by olkovale         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ FLAGS = -g -Wall -Wextra -Werror
 .PHONY: re all clean fclean
 
 %.o : 
-	gcc -Iincludes $(FLAGS) -c $(SRCS)
+	gcc -Iincs $(FLAGS) -c $(SRCS)
 
 all: $(NAME)
 

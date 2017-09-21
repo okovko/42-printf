@@ -6,16 +6,16 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/18 08:15:44 by olkovale          #+#    #+#             */
-/*   Updated: 2017/06/21 18:59:34 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/06 08:10:08 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_toupper(int c)
+int		ft_toupper(int cc)
 {
-	if (c >= 'a' && c <= 'z')
-		return (c - ' ');
+	if (cc >= 'a' && cc <= 'z')
+		return (cc - ' ');
 	else
-		return (c);
+		return (cc);
 }

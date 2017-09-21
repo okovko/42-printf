@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 11:29:19 by olkovale          #+#    #+#             */
-/*   Updated: 2017/07/20 09:08:20 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/11 16:44:46 by oleg             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,15 @@
 
 #include "libft.h"
 
-char	*ft_strncpy(char *dest, const char *src, size_t n)
+char	*ft_strncpy(char *dst, const char *src, int sz)
 {
-	char	*head;
-	size_t	i;
+	char	cc;
+	char	*beg;
 
-	head = dest;
-	i = 0;
-	while (src[i] && i < n)
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	while (i < n)
-	{
-		dest[i] = '\0';
-		i++;
-	}
-	return (head);
+	beg = dst;
+	while ((cc = *src++) && sz--)
+		*dst++ = cc;
+	while (sz--)
+		*dst++ = '\0';
+	return (beg);
 }

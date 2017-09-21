@@ -6,29 +6,27 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/18 08:32:32 by olkovale          #+#    #+#             */
-/*   Updated: 2017/06/23 21:40:07 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/06 15:18:29 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include <stdlib.h>
 
 #include "libft.h"
 
-char	*ft_strmap(char const *s, char (*f)(char))
+char	*ft_strmap(char const *ss, char (*ff)(char))
 {
-	char	c;
-	char	*head;
+	char	cc;
+	char	*beg;
 	char	*map;
 
-	if (!s || !f)
+	if (NULL == ss || NULL == ff)
 		return (NULL);
-	if ((map = ft_strnew(ft_strlen(s))))
-	{
-		head = map;
-		while ((c = *s++))
-			*map++ = f(c);
-		*map = '\0';
-		return (head);
-	}
-	return (NULL);
+	if (NULL == (map = malloc(ft_strlen(ss) + 1)))
+		return (NULL);
+	beg = map;
+	while ((cc = *ss++))
+		*map++ = ff(cc);
+	*map = '\0';
+	return (beg);
 }

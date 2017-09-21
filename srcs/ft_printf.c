@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/14 03:43:23 by olkovale          #+#    #+#             */
-/*   Updated: 2017/08/26 06:08:24 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/20 15:08:39 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -281,7 +281,8 @@ char				*store_fmt_text(char *loc, char **endptr)
 		{
 			write(1, g_buf, sizeof(g_buf));
 			g_iter = 0;
-			g_buf = (const char[sizeof(g_buf)]){0};
+			// don't need to reset g_buf, in theory
+			//g_buf = (const char[sizeof(g_buf)]){0};
 		}
 	}
 	*endptr = loc;
@@ -395,6 +396,7 @@ t_fmt_sym			parse_fmt_tok(t_map_kv **kv, char *loc, t_fmt_sym sym)
 	ii = sym;
 	while (ii < sizeof(g_tok_map_arr))
 	{
+		// increment ii first, then check to return
 		*kv = ft_mapget(g_tok_map_arr[ii], (void *)loc, ft_map_keycmp_str);
 		if (NULL != kv)
 			return (ii + 1);

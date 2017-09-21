@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 23:06:36 by olkovale          #+#    #+#             */
-/*   Updated: 2017/06/23 16:58:25 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/11 16:47:51 by oleg             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,26 @@
 
 #include "libft.h"
 
-char		**ft_strsplit(char const *str, char c)
+char		**ft_strsplit(const char *ss, const char *dlm)
 {
-	unsigned	i;
-	unsigned	count;
-	char		**strarr;
+	int			ii;
+	int			sz;
+	char		**sarr;
 
-	if (!str)
+	if (NULL == ss || NULL == dlm)
 		return (NULL);
-	while (*str && *str == c)
-		++str;
-	i = 0;
-	count = ft_count_words(str, c);
-	if (((strarr = (char **)malloc((count + 1) * sizeof(char *)))) == NULL)
+	ss = ft_strtokbeg(ss, dlm);
+	ii = 0;
+	sz = ft_strtokamt(ss, dlm);
+	if (NULL == (sarr = malloc((sz + 1) * sizeof(char *))))
 		return (NULL);
-	while (i < count + 1)
+	while (ii < sz + 1)
 	{
-		strarr[i] = ft_strnew(ft_word_length(str, c));
-		ft_word_copy(strarr[i], str, c);
-		str = ft_next_word(str, c);
-		i++;
+		sarr[ii] = malloc(ft_strtoklen(ss, dlm) + 1);
+		ft_strtokcpy(sarr[ii], ss, dlm);
+		ss = ft_strtoknxt(ss, dlm);
+		ii++;
 	}
-	strarr[count] = 0;
-	return (strarr);
+	sarr[sz] = 0;
+	return (sarr);
 }

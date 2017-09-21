@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/18 08:32:07 by olkovale          #+#    #+#             */
-/*   Updated: 2017/08/22 10:31:32 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/06 13:36:44 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,25 @@
 
 #include "libft.h"
 
-char	*ft_strnstr(const char *str, const char *query, size_t n)
+char	*ft_strnstr(const char *ss, const char *qry, int sz)
 {
-	size_t	i;
-	size_t	j;
-	size_t	nlen;
+	const char	*ss_itr;
+	const char	*qry_itr;
+	int			qsz;
 
-	nlen = ft_strlen(query);
-	if (ft_strlen(str) < nlen)
-		return (NULL);
-	if (*query == '\0')
-		return ((char *)str);
-	i = 0;
-	while (i + nlen <= n && str[i])
+	qsz = ft_strlen(qry);
+	while (*ss && sz-- >= qsz)
 	{
-		j = 0;
-		while (query[j] && str[i + j] == query[j])
-			j++;
-		if (query[j] == '\0')
-			return ((char *)(str + i));
-		i++;
+		ss_itr = ss;
+		qry_itr = qry;
+		while (*ss_itr && *qry_itr)
+			if (*ss_itr++ != *qry_itr++)
+				break ;
+		if ('\0' == *qry_itr)
+			return ((char *)(ss));
+		if ('\0' == *ss_itr)
+			return (NULL);
+		ss++;
 	}
 	return (NULL);
 }

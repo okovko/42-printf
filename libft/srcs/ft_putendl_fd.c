@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/18 08:15:20 by olkovale          #+#    #+#             */
-/*   Updated: 2017/06/21 19:16:35 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/06 15:38:31 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 
 #include "libft.h"
 
-void	ft_putendl_fd(char const *s, int fd)
+void	ft_putendl_fd(const char *ss, int fd)
 {
-	char	newline;
+	char	nl;
 
-	if (s)
-	{
-		newline = '\n';
-		write(fd, s, ft_strlen(s));
-		write(fd, &newline, 1);
-	}
+	if (NULL == ss)
+		return ;
+	nl = '\n';
+	write(fd, ss, ft_strlen(ss));
+	write(fd, &nl, 1);
 }

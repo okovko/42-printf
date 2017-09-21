@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/11 06:53:54 by olkovale          #+#    #+#             */
-/*   Updated: 2017/07/12 23:19:48 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/06 15:46:29 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,10 @@
 
 #include "libft.h"
 
-void	ft_memdel(void **ap)
+void	ft_memdel(void **mm)
 {
-	if (ap)
-	{
-		free(*ap);
-		*ap = NULL;
-	}
+	if (NULL == mm)
+		return ;
+	free(*mm);
+	*mm = NULL;
 }

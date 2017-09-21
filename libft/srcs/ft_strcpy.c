@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 11:29:19 by olkovale          #+#    #+#             */
-/*   Updated: 2017/06/23 16:42:28 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/11 16:43:59 by oleg             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 char	*ft_strcpy(char *dst, const char *src)
 {
-	char	*head;
+	char	cc;
+	char	*beg;
 
-	head = dst;
-	while (*src)
-		*dst++ = *src++;
+	beg = dst;
+	while ((cc = *src++))
+		*dst++ = cc;
 	*dst = '\0';
-	return (head);
+	return (beg);
 }

@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/11 06:53:54 by olkovale          #+#    #+#             */
-/*   Updated: 2017/06/23 16:42:54 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/06 15:21:46 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,27 @@
 
 #include "libft.h"
 
-size_t	ft_strlcat(char *dest, const char *src, size_t size)
+int		ft_strlcat(char *dst, const char *src, int sz)
 {
-	size_t	i;
-	size_t	dst_len;
-	size_t	src_len;
-	size_t	left_to_copy;
+	int		ii;
+	int		dst_sz;
+	int		src_sz;
+	int		left_to_copy;
 
-	i = 0;
-	while (dest[i] && i < size)
-		i++;
-	dst_len = i;
-	src_len = ft_strlen(src);
-	left_to_copy = size - dst_len;
+	ii = 0;
+	while (dst[ii] && ii < sz)
+		ii++;
+	dst_sz = ii;
+	src_sz = ft_strlen(src);
+	left_to_copy = sz - dst_sz;
 	if (left_to_copy == 0)
-		return (dst_len + src_len);
-	i = 0;
-	while (src[i] && left_to_copy-- > 1)
+		return (dst_sz + src_sz);
+	ii = 0;
+	while (src[ii] && left_to_copy-- > 1)
 	{
-		dest[dst_len + i] = src[i];
-		i++;
+		dst[dst_sz + ii] = src[ii];
+		ii++;
 	}
-	dest[dst_len + i] = '\0';
-	return (dst_len + src_len);
+	dst[dst_sz + ii] = '\0';
+	return (dst_sz + src_sz);
 }

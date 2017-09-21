@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/11 06:53:54 by olkovale          #+#    #+#             */
-/*   Updated: 2017/08/13 01:05:46 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/06 14:54:37 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 #include "libft.h"
 
-char	*ft_strsub(char const *s, unsigned int start, size_t len)
+char	*ft_strsub(char const *ss, int beg, int sz)
 {
 	char	*sub;
 
-	if (!s)
+	if (NULL == ss || beg < 0 || sz < 0)
 		return (NULL);
-	if ((sub = ft_strnew(len)))
-		return (ft_strncpy(sub, s + start, len));
-	return (NULL);
+	if (NULL == (sub = ft_strnew(sz)))
+		return (NULL);
+	return (ft_strncpy(sub, ss + beg, sz));
 }

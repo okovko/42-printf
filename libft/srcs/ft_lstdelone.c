@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/18 08:15:09 by olkovale          #+#    #+#             */
-/*   Updated: 2017/07/12 23:15:25 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/06 15:54:08 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 #include "libft.h"
 
-void	ft_lstdelone(t_list **alst, void (*del)(void *, size_t))
+t_lst	*ft_lstdelone(t_lst **ll, void (*del)(void *, int))
 {
-	del((**alst).content, (**alst).content_size);
-	free(*alst);
-	*alst = NULL;
+	if (!ll || !*ll || !del)
+		return (NULL);
+	del((*ll)->dat, (*ll)->sz);
+	free(*ll);
+	*ll = NULL;
+	return (NULL);
 }

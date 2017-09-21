@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 16:37:46 by olkovale          #+#    #+#             */
-/*   Updated: 2017/08/21 21:55:42 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/06 15:53:22 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 #include "libft.h"
 
-t_list	*ft_lstnode(void const *content, size_t content_size)
+t_lst	*ft_lstnode(void const *dat, int sz)
 {
-	t_list	*link;
+	t_lst	*nod;
 
-	NULLIF((link = (t_list *)malloc(sizeof(t_list))) == NULL);
-	link->content = (void *)content;
-	link->content_size = content_size;
-	link->next = NULL;
-	return (link);
+	if (NULL == (nod = malloc(sizeof(t_lst))))
+		return (NULL);
+	nod->dat = (void *)dat;
+	nod->sz = sz;
+	nod->nxt = NULL;
+	return (nod);
 }

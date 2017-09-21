@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/18 08:15:47 by olkovale          #+#    #+#             */
-/*   Updated: 2017/06/23 17:00:01 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/06 08:10:32 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 #include "libft.h"
 
-char	*ft_strtrim(char const *s)
+char	*ft_strtrim(char const *ss)
 {
-	char	c;
-	char	*start;
+	char	cc;
+	char	*beg;
 
-	if (!s)
+	if (NULL == ss)
 		return (NULL);
-	while (ISSPACE((c = *s)))
-		s++;
-	if (!*((start = (char *)s)))
+	while (ISSPACE((cc = *ss)))
+		ss++;
+	if (!*((beg = (char *)ss)))
 		return (ft_strnew(0));
-	while ((c = *s))
-		s++;
-	s--;
-	while (ISSPACE((c = *s)))
-		s--;
-	return (ft_strsub(start, 0, s - start + 1));
+	while ((cc = *ss))
+		ss++;
+	ss--;
+	while (ISSPACE((cc = *ss)))
+		ss--;
+	return (ft_strsub(beg, 0, ss - beg + 1));
 }

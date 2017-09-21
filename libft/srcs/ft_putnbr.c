@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/18 08:15:21 by olkovale          #+#    #+#             */
-/*   Updated: 2017/06/21 19:05:21 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/06 15:37:59 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,23 @@
 
 #include "libft.h"
 
-void	ft_putnbr(int n)
+void	ft_putnbr(int val)
 {
-	char	*head;
-	char	*str;
-	char	num[22];
+	char	ss[22];
+	int		sz;
+	int		tmp;
 
-	str = num;
-	head = str;
-	if (n < 0)
-		*str++ = '-';
-	*str++ = ABS(n % 10) + '0';
-	n /= 10;
-	while (n)
+	sz = ft_diglen(val);
+	val < 0 ? ss[0] = '-' : (void)0;
+	val == 0 ? ss[0] = '0' : (void)0;
+	ss[sz] = '\0';
+	sz--;
+	tmp = val;
+	while (tmp)
 	{
-		*str++ = ABS(n % 10) + '0';
-		n /= 10;
+		ss[sz] = '0' + ABS(tmp % 10);
+		tmp /= 10;
+		sz--;
 	}
-	*str = '\0';
-	ft_strrev(*head == '-' ? head + 1 : head);
-	ft_putstr(head);
+	ft_putstr(ss);
 }

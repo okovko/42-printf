@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/11 06:53:54 by olkovale          #+#    #+#             */
-/*   Updated: 2017/06/19 18:19:01 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/06 15:28:43 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,10 @@
 
 #include "libft.h"
 
-void	ft_strdel(char **ap)
+void	ft_strdel(char **ss)
 {
-	if (ap)
-	{
-		free(*ap);
-		*ap = NULL;
-	}
+	if (NULL == ss)
+		return ;
+	free(*ss);
+	*ss = NULL;
 }
