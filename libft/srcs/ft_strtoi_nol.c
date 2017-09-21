@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strtoi_nol.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/07 12:06:06 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/20 19:53:26 by olkovale         ###   ########.fr       */
+/*   Created: 2017/09/20 19:52:53 by olkovale          #+#    #+#             */
+/*   Updated: 2017/09/20 21:13:07 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_atoi(const char *ss)
+int		ft_strtoi_nol(const char *ss, char **endptr)
 {
 	char	cc;
-	int		neg_num;
-	t_bool	neg;
+	int		nn;
 
-	while ((cc = *ss) && ISSPACE(cc))
+	nn = 0;
+	while ((cc = *ss) && ISDIGIT(cc))
+	{
+		nn = nn * 10 - cc + '0';
 		ss++;
-	neg = cc == '-';
-	ss += cc == '-' || cc == '+';
-	neg_num = 0;
-	while ((cc = *ss++) && ISDIGIT(cc))
-		neg_num = neg_num * 10 - cc + '0';
-	return (neg ? neg_num : -neg_num);
+	}
+	*endptr = ss;
+	return (nn);
 }

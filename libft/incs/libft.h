@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 11:29:19 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/06 13:00:47 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/20 20:58:57 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ int					ft_strtokamt(const char *ss, const char *dlm);
 char				*ft_strtokcpy(char *dst, const char *src, const char *dlm);
 char				*ft_strtoknxt(const char *ss, const char *dlm);
 int					ft_strtoklen(const char *ss, const char *dlm);
-int					ft_atoi(char *ss);
+int					ft_atoi(const char *ss);
+int					ft_strtoi_nol(const char *ss, char **endptr);
 int					ft_isalpha(int cc);
 int					ft_isdigit(int cc);
 int					ft_isalnum(int cc);

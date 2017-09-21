@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/14 03:43:23 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/20 15:08:39 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/21 00:22:38 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ static t_map		g_flag_map =
 };
 static t_map_kv		g_width_kvs[] = (t_map_kv[])
 {
-	{(void *)"*", (void *)(t_fmt_width[]){E_FMT_TOK_WIDTH_BEFORE_ARG}},
+	{(void *)"*", (void *)(t_fmt_width[]){E_FMT_TOK_WIDTH_BEFORE}},
+	/*
 	{(void *)"1", (void *)(t_fmt_width[]){E_FMT_TOK_WIDTH_NUM}},
 	{(void *)"2", (void *)(t_fmt_width[]){E_FMT_TOK_WIDTH_NUM}},
 	{(void *)"3", (void *)(t_fmt_width[]){E_FMT_TOK_WIDTH_NUM}},
@@ -51,6 +52,7 @@ static t_map_kv		g_width_kvs[] = (t_map_kv[])
 	{(void *)"7", (void *)(t_fmt_width[]){E_FMT_TOK_WIDTH_NUM}},
 	{(void *)"8", (void *)(t_fmt_width[]){E_FMT_TOK_WIDTH_NUM}},
 	{(void *)"9", (void *)(t_fmt_width[]){E_FMT_TOK_WIDTH_NUM}},
+	*/
 };
 static t_map		g_width_map =
 {
@@ -61,7 +63,7 @@ static t_map		g_width_map =
 };
 static t_map_kv		g_prec_kvs[] = (t_map_kv[])
 {
-	{(void *)".*", (void *)(t_fmt_prec[]){E_FMT_TOK_PREC_BEFORE_ARG}},
+	{(void *)".*", (void *)(t_fmt_prec[]){E_FMT_TOK_PREC_BEFORE}},
 	{(void *)".", (void *)(t_fmt_prec[]){E_FMT_TOK_PREC_NUM}},
 };
 static t_map		g_prec_map =
@@ -123,17 +125,26 @@ static t_map		g_spec_map =
 	.val_sz = sizeof(t_fmt_spec),
 	.kvs = g_spec_kvs,
 };
-static t_fmt_sym	g_tok_map[] =
+/*
+static t_map		g_tok_map_arr[] =
 {
-	[E_FMT_TOK_NONE] = E_FMT_TOK_NONE,
+	g_flag_map,
+	g_len_map,
+	g_prec_map,
+	g_len_map,
+	g_spec_map,
+};
+static t_fmt_sym	g_sym_arr[] =
+{
+	[E_FMT_TOK_NONE] = E_FMT_SYM_NONE,
 	[E_FMT_TOK_FLAG_LEFT_JUSTIFY] = E_FMT_SYM_FLAG,
 	[E_FMT_TOK_FLAG_FORCE_SIGN] = E_FMT_SYM_FLAG,
 	[E_FMT_TOK_FLAG_SPACE_SIGN] = E_FMT_SYM_FLAG,
 	[E_FMT_TOK_FLAG_HASH_OVERLOADED] = E_FMT_SYM_FLAG,
 	[E_FMT_TOK_FLAG_LEFT_PAD_ZEROES] = E_FMT_SYM_FLAG,
-	[E_FMT_TOK_WIDTH_BEFORE_ARG] = E_FMT_SYM_WIDTH,
+	[E_FMT_TOK_WIDTH_BEFORE] = E_FMT_SYM_WIDTH,
 	[E_FMT_TOK_WIDTH_NUM] = E_FMT_SYM_WIDTH,
-	[E_FMT_TOK_PREC_BEFORE_ARG] = E_FMT_SYM_PREC,
+	[E_FMT_TOK_PREC_BEFORE] = E_FMT_SYM_PREC,
 	[E_FMT_TOK_PREC_NUM] = E_FMT_SYM_PREC,
 	[E_FMT_TOK_LEN_CHAR] = E_FMT_SYM_LEN,
 	[E_FMT_TOK_LEN_SHRT] = E_FMT_SYM_LEN,
@@ -162,6 +173,7 @@ static t_fmt_sym	g_tok_map[] =
 	[E_FMT_TOK_SPEC_N_PTR] = E_FMT_SYM_SPEC,
 	[E_FMT_TOK_SPEC_PERCENT] = E_FMT_SYM_SPEC,
 };
+*/
 static t_map_kv		g_arg_kvs[] = (t_map_kv[])
 {
 	{(void *)(t_fmt_exp){.spec = E_FMT_SPEC_INT, .len = E_FMT_LEN_NONE}, (void *)(t_fmt_arg[]){E_FMT_ARG_INT}},
@@ -251,7 +263,7 @@ static t_convert_fp	g_convert_map[] = (t_convert_fp[])
 };
 static t_parse_fp	g_parse[] =
 {
-	NULL,
+	parse_fmt_nothing,
 	parse_fmt_flags,
 	parse_fmt_width,
 	parse_fmt_prec,
@@ -265,7 +277,7 @@ int					ft_printf(const char *format, ...)
 	return (0);
 }
 
-char				*store_fmt_text(char *loc, char **endptr)
+char				*store_fmt_text(char *loc, char **edg)
 {
 	char	c;
 
@@ -285,7 +297,7 @@ char				*store_fmt_text(char *loc, char **endptr)
 			//g_buf = (const char[sizeof(g_buf)]){0};
 		}
 	}
-	*endptr = loc;
+	*edg = loc;
 	return (loc);
 }
 
@@ -294,134 +306,133 @@ void				store_fmt_exp(t_fmt_exp *exp, void *arg)
 	
 }
 
-t_fmt_exp			*parse_fmt_flags(t_fmt_exp *exp, t_map_kv *kv,
-									char *loc, char **endptr)
+t_map_kv			*parse_fmt_tok(t_map *mp, char *loc, char **edg)
 {
-	int				flags;
-	t_fmt_flag_bit	bit;
+	t_map_kv	*kv;
 
-	flags = *(t_fmt_flag_bit *)kv->val;
-	loc += ft_strlen((char *)kv->key);
-	while (E_FMT_FLAG_BIT_NONE != (bit = parse_fmt_flag_bit(loc, &loc)))
-		flags |= bit;
-	exp->flags = flags;
-	*endptr = loc;
-	return (exp);
+	kv = ft_mapget(mp, (void *)loc, ft_map_keycmp_str);
+	if (NULL != kv)
+		*edg = loc + ft_strlen((char *)kv->key);
+	return (kv);
 }
 
-t_fmt_flag_bit		parse_fmt_flag_bit(char *loc, char **endptr)
+t_map_kv			*parse_fmt_arg(void *arg, t_fmt_exp *exp)
+{
+
+}
+
+t_fmt_sym			parse_fmt_pass(t_fmt_exp *exp,
+									char *loc, char **edg)
+{
+	(void)exp;
+	loc++;
+	*edg = loc;
+	return (E_FMT_SYM_NONE);
+}
+
+t_fmt_sym			parse_fmt_flags(t_fmt_exp *exp,
+									char *loc, char **edg)
 {
 	t_map_kv		*kv;
-	t_fmt_flag_bit	bit;
 
-	kv = ft_mapget(g_flag_map, (void *)loc, ft_map_keycmp_str);
-	if (NULL != kv)
+	if (NULL != (kv = parse_fmt_tok(g_flag_map, loc, edg)))
+		exp->set |= E_FMT_EXP_SET_FLAGS;
+	while (NULL != kv)
 	{
-		bit = *(t_fmt_flag_bit *)kv->val;
-		*endptr = loc += ft_strlen((char *)kv->key);
-		return (bit);
+		exp->flags |= *(t_fmt_flag_bit *)kv->val;
+		kv = parse_fmt_tok(g_flag_map, loc, edg);
 	}
-	return (E_FMT_FLAG_BIT_NONE);
+	return (exp->set & E_FMT_EXP_SET_FLAGS_SET ?
+			E_FMT_SYM_FLAG : E_FMT_SYM_NONE);
 }
 
-t_fmt_exp			*parse_fmt_width(t_fmt_exp *exp, t_map_kv *kv,
-									char *loc, char **endptr)
+t_fmt_sym			parse_fmt_width(t_fmt_exp *exp,
+									char *loc, char **edg)
 {
-	char			c;
-	int				width;
+	t_map_kv		*kv;
 
-	exp->width_id = *(t_fmt_width *)kv->val;
-	if (E_FMT_WIDTH_BEFORE_ARG == exp->width_id)
+	exp->width = ft_strtoi_nol(loc, edg);
+	if (loc != *edg)
 	{
-		exp->width = 0;
-		*endptr = loc += ft_strlen((char *)kv->key);
-		return (exp);
+		exp->set |= E_FMT_SET_WIDTH;
+		return (E_FMT_SYM_WIDTH);
 	}
-	width = 0;
-	while ((c = *loc) && ISDIGIT(c))
+	if (NULL != (kv = parse_fmt_tok(g_width_map, loc, edg)))
 	{
-		width = width * 10 + c - '0';
-		loc++;
+		exp->set |= E_FMT_SET_WIDTH_SET;
+		exp->width = *(t_fmt_width *)kv->val;
+		return (E_FMT_SYM_WIDTH);
 	}
-	exp->width = width;
-	*endptr = loc;
-	return (exp);
+	return (E_FMT_SYM_NONE);
 }
 
-t_fmt_exp			*parse_fmt_prec(t_fmt_exp *exp, t_map_kv *kv,
-									char *loc, char **endptr)
+t_fmt_sym			parse_fmt_prec(t_fmt_exp *exp,
+									char *loc, char **edg)
 {
-	char			c;
-	int				prec;
+	t_map_kv		*kv;
 
-	exp->prec_id = *(t_fmt_prec *)kv->val;
-	if (E_FMT_PREC_BEFORE_ARG == exp->prec_id)
+	exp->prec = ft_strtoi_nol(loc, edg);
+	if (loc != *edg)
 	{
-		exp->prec = 0;
-		*endptr = loc += ft_strlen((char *)kv->key);
-		return (exp);
+		exp->set |= E_FMT_SET_PREC;
+		return (E_FMT_SYM_PREC);
 	}
-	loc += ft_strlen((char *)kv->key);
-	prec = 0;
-	while ((c = *loc) && ISDIGIT(c))
+	if (NULL != (kv = parse_fmt_tok(g_prec_map, loc, edg)))
 	{
-		prec = prec * 10 + c - '0';
-		loc++;
+		exp->set |= E_FMT_SET_PREC_SET;
+		exp->prec = *(t_fmt_width *)kv->val;
+		return (E_FMT_SYM_WIDTH);
 	}
-	exp->prec = prec;
-	*endptr = loc;
-	return (exp);
+	return (E_FMT_SYM_NONE);
 }
 
-t_fmt_exp			*parse_fmt_len(t_fmt_exp *exp, t_map_kv *kv,
-									char *loc, char **endptr)
+t_fmt_exp			*parse_fmt_len(t_fmt_exp *exp,
+									char *loc, char **edg)
 {
-	exp->len = *(t_fmt_len *)kv->val;
-	*endptr = loc + ft_strlen((char *)kv->key);
-	return (exp);
+	t_map_kv		*kv;
+
+	if (NULL != (kv = parse_fmt_tok(g_len_map, loc, edg)))
+		exp->len = *(t_fmt_len *)kv->val;
+	return (NULL == kv ? E_FMT_SYM_NONE : E_FMT_SYM_LEN);
 }
 
 t_fmt_exp			*parse_fmt_spec(t_fmt_exp *exp, t_map_kv *kv,
-									char *loc, char **endptr)
+									char *loc, char **edg)
 {
-	exp->spec = *(t_fmt_spec *)kv->val;
-	*endptr = loc + ft_strlen((char *)kv->key);
-	return (exp);
+	t_map_kv		*kv;
+
+	if (NULL != (kv = parse_fmt_tok(g_spec_map, loc, edg)))
+		exp->spec = *(t_fmt_spec *)kv->val;
+	return (NULL == kv ? E_FMT_SYM_NONE : E_FMT_SYM_SPEC);
 }
 
-t_fmt_sym			parse_fmt_tok(t_map_kv **kv, char *loc, t_fmt_sym sym)
+t_fmt_sym			parse_fmt_sym(t_fmt_exp *exp, t_fmt_sym sym,
+								  char *loc, char **edg)
 {
-	int		ii;
+	int			ii;
 
-	ii = sym;
-	while (ii < sizeof(g_tok_map_arr))
+	ii = sym + 1;
+	while (ii < sizeof(g_parse))
 	{
-		// increment ii first, then check to return
-		*kv = ft_mapget(g_tok_map_arr[ii], (void *)loc, ft_map_keycmp_str);
-		if (NULL != kv)
-			return (ii + 1);
+		if (E_FMT_SYM_NONE != g_parse[ii](exp, loc, edg))
+			return (ii);
 		ii++;
 	}
 	return (E_FMT_SYM_NONE);
 }
 
-t_fmt_exp			*parse_fmt_exp(t_fmt_exp *exp, char *loc, char **endptr)
+t_fmt_exp			*parse_fmt_exp(void *arg, char *loc, char **edg)
 {
-	char				c;
 	t_fmt_sym			sym;
 	t_map_kv			*kv;
+	t_fmt_exp			*exp;
 
-	sym = E_FMT_SYM_NONE;
-	while ((c = *loc) && E_FMT_SYM_SPEC != sym)
-	{
-		sym = parse_fmt_tok(&kv, loc, sym);
-		if (E_FMT_SYM_NONE != sym)
-			g_parse[sym](exp, kv, loc, &loc);
-		else
-			loc++;
-	}
-	if (E_FMT_SYM_SPEC != sym)
+	if (NULL == (exp = malloc(sizeof(exp))))
 		return (NULL);
-	*endptr = loc;
+	exp->set = E_FMT_EXP_SET_UNSET;
+	sym = E_FMT_SYM_NONE;
+	while ('\0' != *loc && E_FMT_SYM_SPEC != sym)
+		sym = parse_fmt_sym(sym, loc, edg);
+	kv = ft_mapget(g_
 	return (exp);
 }

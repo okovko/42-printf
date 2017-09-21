@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/14 03:44:40 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/20 15:10:34 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/21 00:22:47 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 #include "libft.h"
 
-typedef void (*t_parse_fp)(t_fmt_exp *, t_map_kv *, char *, char **);
+typedef void (*t_parse_fp)(t_fmt_exp *, char *, char **);
 typedef void (*t_convert_fp)(t_fmt_exp *, void *);
 
 typedef enum	e_fmt_sym
@@ -41,9 +41,9 @@ typedef enum	e_fmt_tok
 	E_FMT_TOK_FLAG_HASH_OVERLOADED,
 	E_FMT_TOK_FLAG_LEFT_PAD_ZEROES,
 	E_FMT_TOK_WIDTH_NUM,
-	E_FMT_TOK_WIDTH_BEFORE_ARG,
+	E_FMT_TOK_WIDTH_BEFORE,
 	E_FMT_TOK_PREC_NUM,
-	E_FMT_TOK_PREC_BEFORE_ARG,
+	E_FMT_TOK_PREC_BEFORE,
 	E_FMT_TOK_LEN_CHAR,
 	E_FMT_TOK_LEN_SHRT,
 	E_FMT_TOK_LEN_LONG,
@@ -72,6 +72,7 @@ typedef enum	e_fmt_tok
 	E_FMT_TOK_SPEC_PERCENT,
 }				t_fmt_tok;
 
+/*
 typedef enum	e_fmt_flag
 {
 	E_FMT_FLAG_NONE,
@@ -81,6 +82,7 @@ typedef enum	e_fmt_flag
 	E_FMT_FLAG_HASH_OVERLOADED,
 	E_FMT_FLAG_LEFT_PAD_ZEROES,
 }				t_fmt_flag;
+*/
 
 typedef enum	e_fmt_flag_bit
 {
@@ -94,16 +96,14 @@ typedef enum	e_fmt_flag_bit
 
 typedef enum		e_fmt_width
 {
-	E_FMT_WIDTH_NONE,
-	E_FMT_WIDTH_NUM,
-	E_FMT_WIDTH_BEFORE_ARG,
+	E_FMT_WIDTH_BEFORE = ~(~0u >> 1),
+	E_FMT_WIDTH_NONE = 0,
 }					t_fmt_width;
 
 typedef enum		e_fmt_prec
 {
-	E_FMT_PREC_NONE,
-	E_FMT_PREC_NUM,
-	E_FMT_PREC_BEFORE_ARG,
+	E_FMT_PREC_BEFORE = ~(~0u >> 1),
+	E_FMT_PREC_NONE = 0,
 }					t_fmt_prec;
 
 typedef enum	e_fmt_len
@@ -142,18 +142,39 @@ typedef enum	e_fmt_spec
 	E_FMT_SPEC_PERCENT,
 }				t_fmt_spec;
 
-typedef struct		s_fmt_exp
+typedef union			u_fmt_arg_value
 {
-	int				flags;
-	t_fmt_width		width_id;
-	t_fmt_prec		prec_id;
-	int				width;
-	int				prec;
-	t_fmt_len		len;
-	t_fmt_spec		spec;
-}					t_fmt_exp;
+	signed char			schar;
+	unsigned char		uchar;
+	wint_t				wint;
+	short				sshrt;
+	unsigned short		ushrt;
+	int					sint;
+	unsigned			uint;
+	long				slong;
+	unsigned long		ulong;
+	long long			sllong;
+	unsigned long long	ullong;
+	intmax_t			intmax;
+	uintmax_t			uintmax;
+	size_t				size;
+	ptr_diff_t			ptr_diff;
+	double				dbl;
+	long double			ldbl;
+	char				*str;
+	wchar_t				*wstr;
+	void				*ptr;
+	signed char			*schar_ptr;
+	short				*shrt_ptr;
+	int					*int_ptr;
+	long				*long_ptr;
+	long long			*llong_ptr;
+	intmax_t			*intmax_ptr;
+	size_t				*size_ptr;
+	ptrdiff_t			*ptrdiff_ptr;
+}						t_fmt_arg_value;
 
-typedef enum		e_fmt_arg
+typedef enum		e_fmt_arg_id
 {
 	E_FMT_ARG_NONE,
 	E_FMT_ARG_SCHAR,
@@ -184,41 +205,35 @@ typedef enum		e_fmt_arg
 	E_FMT_ARG_INTMAX_PTR,
 	E_FMT_ARG_SIZE_PTR,
 	E_FMT_ARG_PTRDIFF_PTR,
-}					t_fmt_arg;
+}					t_fmt_arg_id;
 
-/*
-typedef union			u_fmt_arg
+typedef enum		e_fmt_exp_set
 {
-	signed char			schar;
-	unsigned char		uchar;
-	wint_t				wint;
-	short				sshrt;
-	unsigned short		ushrt;
-	int					sint;
-	unsigned			uint;
-	long				slong;
-	unsigned long		ulong;
-	long long			sllong;
-	unsigned long long	ullong;
-	intmax_t			intmax;
-	uintmax_t			uintmax;
-	size_t				size;
-	ptr_diff_t			ptr_diff;
-	double				dbl;
-	long double			ldbl;
-	char				*str;
-	wchar_t				*wstr;
-	void				*ptr;
-	signed char			*schar_ptr;
-	short				*shrt_ptr;
-	int					*int_ptr;
-	long				*long_ptr;
-	long long			*llong_ptr;
-	intmax_t			*intmax_ptr;
-	size_t				*size_ptr;
-	ptrdiff_t			*ptrdiff_ptr;
+	E_FMT_EXP_SET_UNSET = 0,
+	E_FMT_EXP_SET_FLAGS = BIT_FLAG(1),
+	E_FMT_EXP_SET_WIDTH = BIT_FLAG(2),
+	E_FMT_EXP_SET_PREC = BIT_FLAG(3),
+	E_FMT_EXP_SET_LEN = BIT_FLAG(4),
+	E_FMT_EXP_SET_SPEC = BIT_FLAG(5),
+}					t_fmt_exp_set;
+
+typedef struct			s_fmt_arg
+{
+	t_fmt_arg_id		id;
+	t_fmt_arg_value		val;
+	int					sz;
 }						t_fmt_arg;
-*/
+
+typedef struct			s_fmt_exp
+{
+	int					set;
+	int					flags;
+	t_fmt_width			width;
+	t_fmt_prec			prec;
+	t_fmt_len			len;
+	t_fmt_spec			spec;
+	t_fmt_arg			arg;
+}						t_fmt_exp;
 
 int			ft_printf(const char *fmt, ...);
 t_list		*parse_fmt(const char *fmt);
