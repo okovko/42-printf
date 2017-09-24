@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 11:29:19 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/23 21:38:58 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/23 21:50:16 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # define ABS(x) ((x) < 0 ? -(x) : (x))
 # define MAX(a, b) ((a) > (b) ? (a) : (b))
 # define MIN(a, b) ((a) > (b) ? (b) : (a))
+# define BIT_FLAG(n) (~(~0u << 1) << (n - 1))
 
 typedef struct		s_pz
 {
