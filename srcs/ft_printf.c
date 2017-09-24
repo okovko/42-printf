@@ -6,23 +6,15 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/14 03:43:23 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/23 22:06:57 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/24 02:37:32 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-	still need to actually read about va_list syntax, but, just cast
-	to void * and pass into deref'd array of fn ptrs so it should be 1 liner
-	bigger issue is that i didn't account for lowercase and capitalcase
-	specifiers (that i need to do for the first version, anyways)
-	which are: xX, sS, cC
-	still need to implement p specifier
-	still need to handle X properly
-	the next order of business is to strip static off everything because
-	of the 5 function per file limit, and break up the functions into 3 files
-	should maybe move all this junk into the .h file if that's legal
-	actually static should be okay. split each function into file and
-	the maps are not shared between them. i hope.
+	specifiers left to implement: S, C, p
+	still need to do the va_list stuff in ft_printf.c itself
+	rip the wide char stuff from online and also have mike help me understand
+	wtf is going on with that
 */
 
 #include <stdarg.h>
