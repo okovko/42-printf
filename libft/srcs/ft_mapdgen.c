@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/17 19:53:47 by olkovale          #+#    #+#             */
-/*   Updated: 2017/08/18 19:12:06 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/21 02:21:53 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 t_map	*ft_mapdgen(t_map *map, void *keys, void *vals)
 {
+	/*
 	t_map_kv	*iter;
 	t_map_kv	*end;
 
@@ -37,4 +38,9 @@ t_map	*ft_mapdgen(t_map *map, void *keys, void *vals)
 		iter++;
 	}
 	return (map);
+	*/
+	(void)map;
+	(void)keys;
+	(void)vals;
+	return (NULL);
 }
