@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/14 03:43:23 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/23 21:07:32 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/23 22:06:57 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,10 @@ static t_print_arg_fp	g_print_arg_fp[] = (t_print_arg_fp[])
 	[E_FMT_ARG_ID_ULONG] = print_ulong,
 	[E_FMT_ARG_ID_SLLONG] = print_sllong,
 	[E_FMT_ARG_ID_ULLONG] = print_ullong,
-	[E_FMT_ARG_ID_INTMAX] = print_intmax
+	[E_FMT_ARG_ID_INTMAX] = print_intmax,
 	[E_FMT_ARG_ID_UINTMAX] = print_uintmax,
 	[E_FMT_ARG_ID_SIZE] = print_size,
 	[E_FMT_ARG_ID_PTRDIFF] = print_ptrdiff,
-	[E_FMT_ARG_ID_DBL] = print_dbl,
-	[E_FMT_ARG_ID_LDBL] = print_ldbl,
 	[E_FMT_ARG_ID_CHAR] = print_char,
 	[E_FMT_ARG_ID_WINT] = print_wint,
 	[E_FMT_ARG_ID_STR] = print_str,
@@ -57,5 +55,9 @@ static t_print_arg_fp	g_print_arg_fp[] = (t_print_arg_fp[])
 
 int					ft_printf(const char *format, ...)
 {
-	return (print_text_until_arg(format, &format));
+	char	*fmt;
+
+	fmt = (char *)format;
+	(void)g_print_arg_fp;
+	return (print_text_until_arg(fmt, &fmt));
 }

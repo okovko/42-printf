@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 21:22:40 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/23 21:22:40 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/23 21:55:51 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,11 @@ static t_fmt_exp		g_exp_intmax =
 static t_fmt_exp		g_exp_size =
 {
 	.spec = E_FMT_SPEC_INT,
+	.len = E_FMT_LEN_SIZE
+};
+static t_fmt_exp		g_exp_usize =
+{
+	.spec = E_FMT_SPEC_UINT,
 	.len = E_FMT_LEN_SIZE
 };
 static t_fmt_exp		g_exp_ptrdiff =
@@ -114,7 +119,7 @@ static t_fmt_exp		g_exp_ptr =
 };
 static t_map_kv			g_arg_kvs[] = 
 {
-	{(void *)&g_exp_sint, (void *)(t_fmt_arg_id[]){E_FMT_ARG_ID_INT}},
+	{(void *)&g_exp_sint, (void *)(t_fmt_arg_id[]){E_FMT_ARG_ID_SINT}},
 	{(void *)&g_exp_schar, (void *)(t_fmt_arg_id[]){E_FMT_ARG_ID_SCHAR}},
 	{(void *)&g_exp_sshrt, (void *)(t_fmt_arg_id[]){E_FMT_ARG_ID_SSHRT}},
 	{(void *)&g_exp_slong, (void *)(t_fmt_arg_id[]){E_FMT_ARG_ID_SLONG}},
@@ -130,7 +135,7 @@ static t_map_kv			g_arg_kvs[] =
 	{(void *)&g_exp_uintmax, (void *)(t_fmt_arg_id[]){E_FMT_ARG_ID_UINTMAX}},
 	{(void *)&g_exp_usize, (void *)(t_fmt_arg_id[]){E_FMT_ARG_ID_SIZE}},
 	{(void *)&g_exp_uptrdiff, (void *)(t_fmt_arg_id[]){E_FMT_ARG_ID_PTRDIFF}},
-	{(void *)&g_exp_char, (void *)(t_fmt_arg_id[]){E_FMT_ARG_ID_INT}},
+	{(void *)&g_exp_char, (void *)(t_fmt_arg_id[]){E_FMT_ARG_ID_SINT}},
 	{(void *)&g_exp_wint, (void *)(t_fmt_arg_id[]){E_FMT_ARG_ID_WINT}},
 	{(void *)&g_exp_str, (void *)(t_fmt_arg_id[]){E_FMT_ARG_ID_STR}},
 	{(void *)&g_exp_wstr, (void *)(t_fmt_arg_id[]){E_FMT_ARG_ID_WSTR}},
@@ -140,7 +145,7 @@ static t_map			g_arg_map =
 {
 	.sz = sizeof(g_arg_kvs),
 	.key_sz = sizeof(t_fmt_exp),
-	.val_sz = sizeof(t_fmt_arg),
+	.val_sz = sizeof(t_fmt_arg_id),
 	.kvs = g_arg_kvs,
 };
 
@@ -162,7 +167,7 @@ t_fmt_arg_id		parse_fmt_arg_id(t_fmt_exp *exp)
 	t_map_kv		*kv;
 	t_fmt_arg_id	id;
 
-	kv = ft_mapget(g_arg_map, (void *)exp, map_keycmp_exp_spec_len);
+	kv = ft_mapget(&g_arg_map, (void *)exp, map_keycmp_exp_spec_len);
 	id = *(t_fmt_arg_id *)kv->val;
 	return (id);
 }

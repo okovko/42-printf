@@ -6,10 +6,11 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/22 15:59:45 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/22 15:59:45 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/23 22:01:20 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include <stdlib.h>
 
 #include "ft_printf.h"
@@ -23,15 +24,15 @@ static int		fmt(t_fmt_exp *exp, char *ss, char **prnt)
 	t_pz	cpy;
 
 	sz = ft_strlen(ss);
-	sz = MAX(sz, exp->width);
+	sz = MAX(sz, (int)exp->width);
 	fmt = ft_walloc(sz);
-	cpy.sz = MIN(sz, exp->prec);
-	pad.sz = sz - cpy_sz;
+	cpy.sz = MIN(sz, (int)exp->prec);
+	pad.sz = sz - cpy.sz;
 	left = exp->flags & E_FMT_FLAG_BIT_LEFT_JUSTIFY;
 	cpy.p = left ? fmt : fmt + pad.sz;
 	pad.p = left ? fmt + cpy.sz : fmt;
-	ft_memcpy(cpy.p, ss, cpy_sz);
-	ft_memset(pad.p, ' ', pad_sz);
+	ft_memcpy(cpy.p, ss, cpy.sz);
+	ft_memset(pad.p, ' ', pad.sz);
 	*prnt = fmt;
 	return (sz);
 }

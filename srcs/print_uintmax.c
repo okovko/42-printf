@@ -6,13 +6,13 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 06:58:54 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/23 06:58:54 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/23 22:05:30 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-#include "ft_print.h"
+#include "ft_printf.h"
 
 int			print_uintmax(void *arg, t_fmt_exp *exp)
 {
