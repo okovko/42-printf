@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/14 03:44:40 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/23 21:50:53 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/24 15:56:51 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,7 +196,7 @@ t_fmt_sym			parse_fmt_width(t_fmt_exp *exp, char *loc, char **edg);
 t_fmt_sym			parse_fmt_len(t_fmt_exp *exp, char *loc, char **edg);
 t_fmt_arg_id		parse_fmt_arg_id(t_fmt_exp *exp);
 t_map_kv			*parse_fmt_tok(t_map *mp, char *loc, char **edg);
-t_fmt_exp			*parse_fmt_exp(char *loc, char **edg);
+t_fmt_exp			*parse_fmt_exp(char *loc);
 int					print_ptr(void *arg, t_fmt_exp *exp);
 int					print_str(void *arg, t_fmt_exp *exp);
 int					print_char(void *arg, t_fmt_exp *exp);
@@ -216,9 +216,10 @@ int					print_sllong(void *arg, t_fmt_exp *exp);
 int					print_ullong(void *arg, t_fmt_exp *exp);
 int					print_ptrdiff(void *arg, t_fmt_exp *exp);
 int					print_uintmax(void *arg, t_fmt_exp *exp);
-int					print_text_until_arg(char *loc, char **edg);
+int					print_text_until_exp(char *loc, char **edg);
 int					ft_printf(const char *fmt, ...);
 int					print_ullong_base(void *arg, t_fmt_exp *exp, int base);
 int					convert_nbr_pad(t_fmt_exp *exp, int sz, char **conv);
+int					print_arg(const char *fmt, void *arg);
 
 #endif

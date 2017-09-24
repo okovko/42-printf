@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_text_until_arg.c                             :+:      :+:    :+:   */
+/*   print_text_until_exp.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 21:14:55 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/23 22:05:48 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/24 15:56:48 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 static char	g_buf[4096] = {0};
 static int	g_itr = 0;
 
-int			print_text_until_arg(char *loc, char **edg)
+int			print_text_until_exp(char *loc, char **edg)
 {
 	int		sz;
 	char	cc;

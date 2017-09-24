@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/14 03:43:23 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/24 02:37:32 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/24 13:53:15 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,35 +21,58 @@
 
 #include "ft_printf.h"
 
-static t_print_arg_fp	g_print_arg_fp[] = (t_print_arg_fp[])
+static char			*next_exp(const char *fmt)
 {
-	[E_FMT_ARG_ID_NONE] = NULL,
-	[E_FMT_ARG_ID_SCHAR] = print_schar,
-	[E_FMT_ARG_ID_UCHAR] = print_uchar,
-	[E_FMT_ARG_ID_SSHRT] = print_sshrt,
-	[E_FMT_ARG_ID_USHRT] = print_ushrt,
-	[E_FMT_ARG_ID_SINT] = print_sint,
-	[E_FMT_ARG_ID_UINT] = print_uint,
-	[E_FMT_ARG_ID_SLONG] = print_slong,
-	[E_FMT_ARG_ID_ULONG] = print_ulong,
-	[E_FMT_ARG_ID_SLLONG] = print_sllong,
-	[E_FMT_ARG_ID_ULLONG] = print_ullong,
-	[E_FMT_ARG_ID_INTMAX] = print_intmax,
-	[E_FMT_ARG_ID_UINTMAX] = print_uintmax,
-	[E_FMT_ARG_ID_SIZE] = print_size,
-	[E_FMT_ARG_ID_PTRDIFF] = print_ptrdiff,
-	[E_FMT_ARG_ID_CHAR] = print_char,
-	[E_FMT_ARG_ID_WINT] = print_wint,
-	[E_FMT_ARG_ID_STR] = print_str,
-	[E_FMT_ARG_ID_WSTR] = print_wstr,
-	[E_FMT_ARG_ID_PTR] = print_ptr,
-};
+	char	*next;
 
-int					ft_printf(const char *format, ...)
+	if (NULL == (next = ft_strchr(fmt, '%')))
+		return (NULL);
+	if ('%' == *(next + 1))
+		return (next_exp(fmt + 2));
+	return (next);
+}
+
+static int			count_exps(const char *fmt)
 {
-	char	*fmt;
+	int		ii;
+	char	*hit;
+	char	*chk;
 
-	fmt = (char *)format;
-	(void)g_print_arg_fp;
-	return (print_text_until_arg(fmt, &fmt));
+	ii = 0;
+	chk = (char *)fmt;
+	while ('\0' != *(chk = ft_strchr(chk, '%')))
+	{
+		if ('%' == *(chk + 1))
+		{
+			chk += 2;
+			continue ;
+		}
+		ii++;
+		hit = chk;
+	}
+	return (ii);
+}
+
+int					ft_printf(const char *fmt, ...)
+{
+	int		ii;
+	void	*arg;
+	va_list	args;
+	int		arg_sz;
+	int		sz;
+
+	sz = print_text_until_exp((char *)fmt, (char **)&fmt);
+	arg_sz = count_exps(fmt);
+	va_start(args, fmt);
+	ii = 0;
+	while (ii < arg_sz)
+	{
+		arg = va_arg(args, void *);
+		sz += print_arg(fmt, arg);
+		fmt = next_exp(fmt);
+		ii++;
+	}
+	va_end(args);
+	sz += print_text_until_exp((char *)fmt, (char **)&fmt);
+	return (sz);
 }
