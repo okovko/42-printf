@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmemfind.c                                    :+:      :+:    :+:   */
+/*   ft_ludiglen.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/08 04:55:15 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/21 02:32:02 by olkovale         ###   ########.fr       */
+/*   Created: 2017/09/23 06:07:06 by olkovale          #+#    #+#             */
+/*   Updated: 2017/09/23 06:07:06 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_lst		*ft_lstmemfind(t_lst *ll, void *qry, int ofst, int sz)
+unsigned long		ft_ludiglen(unsigned long val)
 {
-	t_lst	*itr;
+	unsigned long		sz;
 
-	itr = ll;
-	while (NULL != itr)
+	sz = val == 0;
+	while (val)
 	{
-		if (0 == ft_memcmp((void *)qry, (void *)(itr->dat + ofst), sz))
-			return (itr);
-		itr = itr->nxt;
+		sz++;
+		val /= 10;
 	}
-	return (NULL);
+	return (sz);
 }

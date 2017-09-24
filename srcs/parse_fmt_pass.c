@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmemfind.c                                    :+:      :+:    :+:   */
+/*   parse_fmt_pass.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/08 04:55:15 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/21 02:32:02 by olkovale         ###   ########.fr       */
+/*   Created: 2017/09/23 21:19:22 by olkovale          #+#    #+#             */
+/*   Updated: 2017/09/23 21:19:22 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-t_lst		*ft_lstmemfind(t_lst *ll, void *qry, int ofst, int sz)
+t_fmt_sym		parse_fmt_pass(t_fmt_exp *exp,
+								char *loc, char **edg)
 {
-	t_lst	*itr;
-
-	itr = ll;
-	while (NULL != itr)
-	{
-		if (0 == ft_memcmp((void *)qry, (void *)(itr->dat + ofst), sz))
-			return (itr);
-		itr = itr->nxt;
-	}
-	return (NULL);
+	(void)exp;
+	loc++;
+	*edg = loc;
+	return (E_FMT_SYM_NONE);
 }

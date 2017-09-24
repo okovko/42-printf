@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 19:52:53 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/20 21:13:07 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/23 21:42:32 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ int		ft_strtoi_nol(const char *ss, char **endptr)
 		nn = nn * 10 - cc + '0';
 		ss++;
 	}
-	*endptr = ss;
+	*endptr = (char *)ss;
 	return (nn);
 }

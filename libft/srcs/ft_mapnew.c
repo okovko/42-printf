@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/17 16:53:07 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/21 02:23:40 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/23 21:41:45 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,5 @@ t_map	*ft_mapnew(int sz, int key_sz, int val_sz)
 	(void)sz;
 	(void)key_sz;
 	(void)val_sz;
+	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 12:06:06 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/06 14:58:04 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/22 16:28:58 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ void	*ft_memset(void *mm, int bb, int sz)
 
 	byts = mm;
 	while (sz--)
-		*(unsigned char *)byts++ = (unsigned char)bb;
+		*byts++ = (unsigned char)bb;
 	return (mm);
 }

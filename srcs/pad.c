@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmemfind.c                                    :+:      :+:    :+:   */
+/*   pad.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/08 04:55:15 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/21 02:32:02 by olkovale         ###   ########.fr       */
+/*   Created: 2017/09/08 20:14:32 by olkovale          #+#    #+#             */
+/*   Updated: 2017/09/20 00:11:49 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-t_lst		*ft_lstmemfind(t_lst *ll, void *qry, int ofst, int sz)
+char	*pad(t_fmt_exp *exp, int sz, char *ss)
 {
-	t_lst	*itr;
+	t_bool	left;
+	t_bool	fsign;
+	t_bool	ssign;
+	char	pad;
 
-	itr = ll;
-	while (NULL != itr)
+	left = 0;
+	pad = ' ';
+	left = exp->flags & E_FMT_FLAG_BIT_LEFT_JUSTIFY;
+	if (exp->flags & E_FMT_FLAG_BIT_LEFT_PAD_ZEROES)
 	{
-		if (0 == ft_memcmp((void *)qry, (void *)(itr->dat + ofst), sz))
-			return (itr);
-		itr = itr->nxt;
+		pad = '0';
+		left = 1;
 	}
-	return (NULL);
+	if (fsign = (exp->flags & E_FMT_FLAG_BIT_FORCE_SIGN))
+		sz++;
+	if (ssign = (exp->flags & E_FMT_FLAG_BIT_SPACE_SIGN))
+		
 }

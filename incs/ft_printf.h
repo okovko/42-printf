@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/14 03:44:40 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/21 00:22:47 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/23 21:44:17 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,6 @@
 #include <wchar.h>
 
 #include "libft.h"
-
-typedef void (*t_parse_fp)(t_fmt_exp *, char *, char **);
-typedef void (*t_convert_fp)(t_fmt_exp *, void *);
 
 typedef enum	e_fmt_sym
 {
@@ -71,18 +68,6 @@ typedef enum	e_fmt_tok
 	E_FMT_TOK_SPEC_N_PTR,
 	E_FMT_TOK_SPEC_PERCENT,
 }				t_fmt_tok;
-
-/*
-typedef enum	e_fmt_flag
-{
-	E_FMT_FLAG_NONE,
-	E_FMT_FLAG_LEFT_JUSTIFY,
-	E_FMT_FLAG_FORCE_SIGN,
-	E_FMT_FLAG_SPACE_SIGN,
-	E_FMT_FLAG_HASH_OVERLOADED,
-	E_FMT_FLAG_LEFT_PAD_ZEROES,
-}				t_fmt_flag;
-*/
 
 typedef enum	e_fmt_flag_bit
 {
@@ -142,6 +127,7 @@ typedef enum	e_fmt_spec
 	E_FMT_SPEC_PERCENT,
 }				t_fmt_spec;
 
+/*
 typedef union			u_fmt_arg_value
 {
 	signed char			schar;
@@ -173,56 +159,50 @@ typedef union			u_fmt_arg_value
 	size_t				*size_ptr;
 	ptrdiff_t			*ptrdiff_ptr;
 }						t_fmt_arg_value;
+*/
 
 typedef enum		e_fmt_arg_id
 {
-	E_FMT_ARG_NONE,
-	E_FMT_ARG_SCHAR,
-	E_FMT_ARG_UCHAR,
-	E_FMT_ARG_WINT,
-	E_FMT_ARG_SSHRT,
-	E_FMT_ARG_USHRT,
-	E_FMT_ARG_SINT,
-	E_FMT_ARG_UINT,
-	E_FMT_ARG_SLONG,
-	E_FMT_ARG_ULONG,
-	E_FMT_ARG_SLLONG,
-	E_FMT_ARG_ULLONG,
-	E_FMT_ARG_INTMAX,
-	E_FMT_ARG_UINTMAX,
-	E_FMT_ARG_SIZE,
-	E_FMT_ARG_PTRDIFF,
-	E_FMT_ARG_DBL,
-	E_FMT_ARG_LDBL,
-	E_FMT_ARG_STR,
-	E_FMT_ARG_WSTR,
-	E_FMT_ARG_PTR,
-	E_FMT_ARG_SCHAR_PTR,
-	E_FMT_ARG_SHRT_PTR,
-	E_FMT_ARG_INT_PTR,
-	E_FMT_ARG_LONG_PTR,
-	E_FMT_ARG_LLONG_PTR,
-	E_FMT_ARG_INTMAX_PTR,
-	E_FMT_ARG_SIZE_PTR,
-	E_FMT_ARG_PTRDIFF_PTR,
+	E_FMT_ARG_ID_NONE,
+	E_FMT_ARG_ID_SCHAR,
+	E_FMT_ARG_ID_UCHAR,
+	E_FMT_ARG_ID_WINT,
+	E_FMT_ARG_ID_SSHRT,
+	E_FMT_ARG_ID_USHRT,
+	E_FMT_ARG_ID_SINT,
+	E_FMT_ARG_ID_UINT,
+	E_FMT_ARG_ID_SLONG,
+	E_FMT_ARG_ID_ULONG,
+	E_FMT_ARG_ID_SLLONG,
+	E_FMT_ARG_ID_ULLONG,
+	E_FMT_ARG_ID_INTMAX,
+	E_FMT_ARG_ID_UINTMAX,
+	E_FMT_ARG_ID_SIZE,
+	E_FMT_ARG_ID_PTRDIFF,
+	E_FMT_ARG_ID_DBL,
+	E_FMT_ARG_ID_LDBL,
+	E_FMT_ARG_ID_STR,
+	E_FMT_ARG_ID_WSTR,
+	E_FMT_ARG_ID_PTR,
+	E_FMT_ARG_ID_SCHAR_PTR,
+	E_FMT_ARG_ID_SHRT_PTR,
+	E_FMT_ARG_ID_INT_PTR,
+	E_FMT_ARG_ID_LONG_PTR,
+	E_FMT_ARG_ID_LLONG_PTR,
+	E_FMT_ARG_ID_INTMAX_PTR,
+	E_FMT_ARG_ID_SIZE_PTR,
+	E_FMT_ARG_ID_PTRDIFF_PTR,
 }					t_fmt_arg_id;
 
 typedef enum		e_fmt_exp_set
 {
-	E_FMT_EXP_SET_UNSET = 0,
+	E_FMT_EXP_SET_NONE = 0,
 	E_FMT_EXP_SET_FLAGS = BIT_FLAG(1),
 	E_FMT_EXP_SET_WIDTH = BIT_FLAG(2),
 	E_FMT_EXP_SET_PREC = BIT_FLAG(3),
 	E_FMT_EXP_SET_LEN = BIT_FLAG(4),
 	E_FMT_EXP_SET_SPEC = BIT_FLAG(5),
 }					t_fmt_exp_set;
-
-typedef struct			s_fmt_arg
-{
-	t_fmt_arg_id		id;
-	t_fmt_arg_value		val;
-	int					sz;
-}						t_fmt_arg;
 
 typedef struct			s_fmt_exp
 {
@@ -232,8 +212,11 @@ typedef struct			s_fmt_exp
 	t_fmt_prec			prec;
 	t_fmt_len			len;
 	t_fmt_spec			spec;
-	t_fmt_arg			arg;
 }						t_fmt_exp;
+
+typedef void (*t_parse_subspec_fp)(t_fmt_exp *, char *, char **);
+typedef int (*t_print_arg_fp)(void *, t_fmt_exp *);
+typedef int (*t_sz_arg_fp)(t_fmt_exp *);
 
 int			ft_printf(const char *fmt, ...);
 t_list		*parse_fmt(const char *fmt);

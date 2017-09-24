@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 11:29:19 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/21 02:18:23 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/23 21:38:58 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,14 @@
 # define ISSPACE2(c) (c == '\r' || c == '\v' || c== '\f')
 # define ISDIGIT(c) (c >= '0' && c <= '9')
 # define ABS(x) ((x) < 0 ? -(x) : (x))
+# define MAX(a, b) ((a) > (b) ? (a) : (b))
+# define MIN(a, b) ((a) > (b) ? (b) : (a))
+
+typedef struct		s_pz
+{
+	void			*p;
+	int				sz;
+}					t_pz;
 
 typedef struct		s_map_kv
 {
@@ -28,17 +36,17 @@ typedef struct		s_map_kv
 
 typedef struct		s_map
 {
+	t_map_kv		*kvs;
 	int				sz;
 	int				key_sz;
 	int				val_sz;
-	t_map_kv		*kvs;
 }					t_map;
 
 typedef struct		s_lst
 {
 	void			*dat;
-	int				sz;
 	struct s_lst	*nxt;
+	int				sz;
 }					t_lst;
 
 typedef enum		e_bool
@@ -87,6 +95,7 @@ int					ft_isascii(int cc);
 int					ft_isprint(int cc);
 int					ft_toupper(int cc);
 int					ft_tolower(int cc);
+void				*ft_walloc(int sz);
 void				*ft_memalloc(int sz);
 void				ft_memdel(void **mem);
 char				*ft_strnew(int sz);
@@ -117,7 +126,13 @@ t_lst				*ft_lstdel(t_lst **ll, void (*del)(void *, int));
 t_lst				*ft_lstadd(t_lst **ll, t_lst *nod);
 t_lst				*ft_lstiter(t_lst *ll, void (*ff)(t_lst *elm));
 t_lst				*ft_lstmap(t_lst *ll, t_lst *(*ff)(t_lst *elm));
+int					ft_nbrlen(int val);
 int					ft_diglen(int val);
+long				ft_ldiglen(long val);
+long long			ft_lldiglen(long long val);
+unsigned			ft_udiglen(unsigned val);
+unsigned long		ft_ludiglen(unsigned long val);
+unsigned long long	ft_lludiglen(unsigned long long val);
 char				*ft_strrev(char *ss);
 t_lst				*ft_lstsrev(t_lst **beg);
 t_lst				*ft_lstnode(void const *dat, int sz);
@@ -134,12 +149,12 @@ int					ft_lstszsum(t_lst *ll);
 int					get_next_scan(const char *buf, const char *dlm, char **out);
 int					get_next_buf(int fd, int sz, char **buf);
 t_map				*ft_mapnew(int sz, int key_sz, int val_sz);
-t_map				*ft_mapsgen(t_map *map, void *keys, void *vals);
-t_map				*ft_mapdgen(t_map *map, void *keys, void *vals);
-t_map_kv			*ft_mapget(t_map *map, void *key, int (*key_cmp)());
-t_map_kv			*ft_mapnget(t_map *map, void *key,
-								int (*keycmp)(void *, void *, size_t), int sz);
-int					ft_map_keycmp_str(void *s1, void *s2, size_t sz);
-int					ft_map_keycmp_strn(void *s1, void *s2, size_t sz);
-int					ft_map_keycmp_strnstr(void *str, void *query, size_t sz);
+t_map				*ft_mapsgen(t_map *mp, void *keys, void *vals);
+t_map				*ft_mapdgen(t_map *mp, void *keys, void *vals);
+t_map_kv			*ft_mapget(t_map *mp, void *key, int (*key_cmp)());
+t_map_kv			*ft_mapnget(t_map *mp, void *key,
+								int (*keycmp)(void *, void *, int), int sz);
+int					ft_map_keycmp_str(void *s1, void *s2, int sz);
+int					ft_map_keycmp_strn(void *s1, void *s2, int sz);
+int					ft_map_keycmp_strnstr(void *str, void *query, int sz);
 #endif

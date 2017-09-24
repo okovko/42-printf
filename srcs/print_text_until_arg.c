@@ -1,40 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   print_text_until_arg.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/27 23:15:17 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/22 17:43:57 by olkovale         ###   ########.fr       */
+/*   Created: 2017/09/23 21:14:55 by olkovale          #+#    #+#             */
+/*   Updated: 2017/09/23 21:14:55 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "ft_printf.h"
 
-#include "libft.h"
+static char	g_buf[4096] = 0;
+static int	g_itr = 0;
 
-char	*ft_itoa(int val)
+int			print_text_until_arg(char *loc, char **edg)
 {
-	char	*ss;
 	int		sz;
-	int		tmp;
+	char	cc;
 
-	sz = ft_nbrlen(val);
-	if (NULL == (ss = malloc(sz + 1)))
-		return (NULL);
-	if (val < 0)
-		ss[0] = '-';
-	if (val == 0)
-		ss[0] = '0';
-	ss[sz] = '\0';
-	sz--;
-	tmp = val;
-	while (tmp)
+	while ((cc = *loc) && '%' != cc)
 	{
-		ss[sz] = '0' + ABS(tmp % 10);
-		tmp /= 10;
-		sz--;
+		if (g_itr < sizeof(g_buf))
+		{
+			g_buf[g_itr] = cc;
+			g_itr++;
+			loc++;
+		}
+		else
+		{
+			write(1, g_buf, sizeof(g_buf));
+			g_itr = 0;
+			return (sizeof(g_buf));
+		}
 	}
-	return (ss);
+	sz = g_itr;
+	write(1, g_buf, g_itr);
+	g_itr = 0;
+	*edg = loc;
+	return (sz);
 }

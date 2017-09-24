@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmemfind.c                                    :+:      :+:    :+:   */
+/*   parse_fmt_exp.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/08 04:55:15 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/21 02:32:02 by olkovale         ###   ########.fr       */
+/*   Created: 2017/09/23 21:22:56 by olkovale          #+#    #+#             */
+/*   Updated: 2017/09/23 21:22:56 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-t_lst		*ft_lstmemfind(t_lst *ll, void *qry, int ofst, int sz)
+t_fmt_exp			*parse_fmt_exp(void *arg, char *loc, char **edg)
 {
-	t_lst	*itr;
+	t_fmt_sym		sym;
+	t_fmt_exp		*exp;
 
-	itr = ll;
-	while (NULL != itr)
-	{
-		if (0 == ft_memcmp((void *)qry, (void *)(itr->dat + ofst), sz))
-			return (itr);
-		itr = itr->nxt;
-	}
-	return (NULL);
+	exp = ft_walloc(sizeof(exp));
+	*exp = (const t_fmt_exp){0};
+	sym = E_FMT_SYM_NONE;
+	while ('\0' != *loc && E_FMT_SYM_SPEC != sym)
+		sym = parse_fmt_sym(sym, loc, edg);
+	return (exp);
 }

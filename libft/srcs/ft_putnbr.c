@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/18 08:15:21 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/06 15:37:59 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/21 05:08:32 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_putnbr(int val)
 	int		sz;
 	int		tmp;
 
-	sz = ft_diglen(val);
+	sz = ft_nbrlen(val);
 	val < 0 ? ss[0] = '-' : (void)0;
 	val == 0 ? ss[0] = '0' : (void)0;
 	ss[sz] = '\0';

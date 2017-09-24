@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmemfind.c                                    :+:      :+:    :+:   */
+/*   print_ullong.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/08 04:55:15 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/21 02:32:02 by olkovale         ###   ########.fr       */
+/*   Created: 2017/09/23 06:52:30 by olkovale          #+#    #+#             */
+/*   Updated: 2017/09/23 06:52:30 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdlib.h>
 
-t_lst		*ft_lstmemfind(t_lst *ll, void *qry, int ofst, int sz)
+#include "ft_printf.h"
+
+int			print_ullong(void *arg, t_fmt_exp *exp)
 {
-	t_lst	*itr;
+	int		base;
 
-	itr = ll;
-	while (NULL != itr)
-	{
-		if (0 == ft_memcmp((void *)qry, (void *)(itr->dat + ofst), sz))
-			return (itr);
-		itr = itr->nxt;
-	}
-	return (NULL);
+	base = 10;
+	if (exp->spec == E_FMT_SPEC_OCTAL)
+		base = 8;
+	else if (exp->spec == E_FMT_SPEC_HEX)
+		base = 16;
+	return (print_ullong_base(arg, exp, base));
 }

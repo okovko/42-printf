@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmemfind.c                                    :+:      :+:    :+:   */
+/*   ft_walloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/08 04:55:15 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/21 02:32:02 by olkovale         ###   ########.fr       */
+/*   Created: 2017/09/22 17:53:08 by olkovale          #+#    #+#             */
+/*   Updated: 2017/09/22 17:53:08 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft.h"
 
-t_lst		*ft_lstmemfind(t_lst *ll, void *qry, int ofst, int sz)
+void	*ft_walloc(int sz)
 {
-	t_lst	*itr;
-
-	itr = ll;
-	while (NULL != itr)
-	{
-		if (0 == ft_memcmp((void *)qry, (void *)(itr->dat + ofst), sz))
-			return (itr);
-		itr = itr->nxt;
-	}
-	return (NULL);
+	void	*mm;
+	
+	if (sz < 0)
+		exit(EXIT_FAILURE);
+	if (NULL == (mm = malloc(sz)))
+		exit(EXIT_FAILURE);
+	return (mm);
 }
