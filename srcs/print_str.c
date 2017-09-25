@@ -26,7 +26,10 @@ static int		fmt(t_fmt_exp *exp, char *ss, char **prnt)
 	sz = ft_strlen(ss);
 	sz = MAX(sz, (int)exp->width);
 	fmt = ft_walloc(sz);
-	cpy.sz = MIN(sz, (int)exp->prec);
+	if (exp->set & E_FMT_EXP_SET_PREC)
+		cpy.sz = MIN(sz, (int)exp->prec);
+	else
+		cpy.sz = sz;
 	pad.sz = sz - cpy.sz;
 	left = exp->flags & E_FMT_FLAG_BIT_LEFT_JUSTIFY;
 	cpy.p = left ? fmt : fmt + pad.sz;

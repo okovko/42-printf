@@ -12,9 +12,6 @@
 
 /*
 	specifiers left to implement: S, C, p
-	still need to do the va_list stuff in ft_printf.c itself
-	rip the wide char stuff from online and also have mike help me understand
-	wtf is going on with that
 */
 
 #include <stdarg.h>
