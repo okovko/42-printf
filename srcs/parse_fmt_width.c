@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 21:20:48 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/23 21:55:43 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/25 01:06:17 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static t_map_kv		g_width_kvs[] = (t_map_kv[])
 };
 static t_map		g_width_map =
 {
-	.sz = sizeof(g_width_kvs),
+	.sz = sizeof(g_width_kvs) / sizeof(g_width_kvs[0]),
 	.key_sz = sizeof(char *),
 	.val_sz = sizeof(t_fmt_width),
 	.kvs = g_width_kvs,

@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 06:09:45 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/23 22:03:55 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/25 05:49:25 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,11 +101,13 @@ int			convert_nbr_pad(t_fmt_exp *exp, int sz, char **conv)
 	return (sz);
 }
 
-int				print_sllong(void *arg, t_fmt_exp *exp)
+int				print_sllong(t_fmt_exp *exp, va_list ap)
 {
-	t_pz	pad;
-	t_pz	nbr;
+	long long	arg;
+	t_pz		pad;
+	t_pz		nbr;
 
+	arg = va_arg(ap, long long);
 	nbr.sz = convert_sllong(exp, *(long long *)arg, (char **)&nbr.p);
 	pad.sz = convert_nbr_pad(exp, nbr.sz, (char **)&pad.p);
 	if (exp->flags & E_FMT_FLAG_BIT_LEFT_JUSTIFY)

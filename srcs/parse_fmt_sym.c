@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 21:22:10 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/23 21:51:24 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/25 01:05:18 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@ t_fmt_sym					parse_fmt_sym(t_fmt_exp *exp, t_fmt_sym sym,
 											char *loc, char **edg)
 {
 	int			ii;
+	int			sz;
 
+	sz = sizeof(g_parse_subspec_fp) / sizeof(g_parse_subspec_fp[0]);
 	ii = sym + 1;
-	while ((size_t)ii < sizeof(g_parse_subspec_fp))
+	while (ii < sz)
 	{
 		if (E_FMT_SYM_NONE != g_parse_subspec_fp[ii](exp, loc, edg))
 			return (ii);

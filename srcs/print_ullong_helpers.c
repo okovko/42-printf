@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 06:17:33 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/23 22:39:49 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/25 05:51:29 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,13 +100,14 @@ static int		convert_ullong_base(t_fmt_exp *exp, unsigned long long val,
 	return (sz);
 }
 
-int			print_ullong_base(void *arg, t_fmt_exp *exp, int base)
+int			print_ullong_base(t_fmt_exp *exp, int base, va_list ap)
 {
-	t_pz	pad;
-	t_pz	nbr;
+	t_pz				pad;
+	t_pz				nbr;
+	unsigned long long	arg;
 
-	nbr.sz = convert_ullong_base(exp, *(unsigned long long *)arg,
-								 base, (char **)&nbr.p);
+	arg = va_arg(ap, unsigned long long);
+	nbr.sz = convert_ullong_base(exp, arg, base, (char **)&nbr.p);
 	pad.sz = convert_nbr_pad(exp, nbr.sz, (char **)&pad.p);
 	if (exp->flags & E_FMT_FLAG_BIT_LEFT_JUSTIFY)
 	{

@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/24 15:52:37 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/24 16:34:22 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/25 04:32:18 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static t_print_arg_fp	g_print_arg_fp[] = (t_print_arg_fp[])
 	[E_FMT_ARG_ID_PTR] = print_ptr,
 };
 
-int				print_arg(const char *fmt, void *arg)
+int				print_arg(const char *fmt, va_list ap)
 {
 	t_fmt_exp		*exp;
 	t_fmt_arg_id	id;
@@ -44,6 +44,6 @@ int				print_arg(const char *fmt, void *arg)
 
 	exp = parse_fmt_exp((char *)fmt);
 	id = parse_fmt_arg_id(exp);
-	sz = g_print_arg_fp[id](arg, exp);
+	sz = g_print_arg_fp[id](exp, ap);
 	return (sz);
 }

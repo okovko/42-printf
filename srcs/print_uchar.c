@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 06:55:11 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/23 22:03:18 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/25 05:48:25 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include "ft_printf.h"
 
-int		print_uchar(void *arg, t_fmt_exp *exp)
+int		print_uchar(t_fmt_exp *exp, va_list ap)
 {
-	return (print_uint(arg, exp));
+	return (print_uint(exp, ap));
 }

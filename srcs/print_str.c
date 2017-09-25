@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/22 15:59:45 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/24 02:50:00 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/25 05:35:52 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ static int		fmt(t_fmt_exp *exp, char *ss, char **prnt)
 	return (sz);
 }
 
-int		print_str(void *arg, t_fmt_exp *exp)
+int		print_str(t_fmt_exp *exp, va_list ap)
 {
 	char	*prnt;
 	int		sz;
 
-	sz = fmt(exp, (char *)arg, &prnt);
+	sz = fmt(exp, va_arg(ap, char *), &prnt);
 	write(1, prnt, sz);
 	free(prnt);
 	return (sz);

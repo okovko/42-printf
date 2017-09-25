@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 06:56:02 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/23 22:03:46 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/25 05:49:03 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include "ft_printf.h"
 
-int			print_intmax(void *arg, t_fmt_exp *exp)
+int			print_intmax(t_fmt_exp *exp, va_list ap)
 {
-	return (print_sllong(arg, exp));
+	return (print_sllong(exp, ap));
 }

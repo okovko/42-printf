@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 21:21:05 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/23 21:54:35 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/25 01:04:56 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static t_map_kv		g_prec_kvs[] = (t_map_kv[])
 };
 static t_map		g_prec_map =
 {
-	.sz = sizeof(g_prec_kvs),
+	.sz = sizeof(g_prec_kvs) / sizeof(g_prec_kvs[0]),
 	.key_sz = sizeof(char *),
 	.val_sz = sizeof(t_fmt_prec),
 	.kvs = g_prec_kvs,

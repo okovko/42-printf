@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 21:14:55 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/24 15:56:48 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/24 23:39:01 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,29 +17,36 @@
 static char	g_buf[4096] = {0};
 static int	g_itr = 0;
 
+static int	print_buf(void)
+{
+	int		sz;
+
+	sz = g_itr;
+	write(1, g_buf, g_itr);
+	g_itr = 0;
+	return (sz);
+}
+
 int			print_text_until_exp(char *loc, char **edg)
 {
 	int		sz;
 	char	cc;
 
-	while ((cc = *loc) && '%' != cc)
+	sz = 0;
+	while (((cc = *loc) && '%' != cc) || ('%' == cc && '%' == *(loc + 1)))
 	{
 		if ((unsigned)g_itr < sizeof(g_buf))
 		{
 			g_buf[g_itr] = cc;
 			g_itr++;
 			loc++;
+			if ('%' == cc)
+				loc++;
 		}
 		else
-		{
-			write(1, g_buf, sizeof(g_buf));
-			g_itr = 0;
-			return (sizeof(g_buf));
-		}
+			sz += print_buf();
 	}
-	sz = g_itr;
-	write(1, g_buf, g_itr);
-	g_itr = 0;
+	sz += print_buf();
 	*edg = loc;
 	return (sz);
 }

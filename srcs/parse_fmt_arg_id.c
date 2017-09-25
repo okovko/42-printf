@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 21:22:40 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/24 16:36:40 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/25 01:04:16 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ static t_map_kv			g_arg_kvs[] =
 	{(void *)&g_exp_uintmax, (void *)(t_fmt_arg_id[]){E_FMT_ARG_ID_UINTMAX}},
 	{(void *)&g_exp_usize, (void *)(t_fmt_arg_id[]){E_FMT_ARG_ID_SIZE}},
 	{(void *)&g_exp_uptrdiff, (void *)(t_fmt_arg_id[]){E_FMT_ARG_ID_PTRDIFF}},
-	{(void *)&g_exp_char, (void *)(t_fmt_arg_id[]){E_FMT_ARG_ID_SINT}},
+	{(void *)&g_exp_char, (void *)(t_fmt_arg_id[]){E_FMT_ARG_ID_CHAR}},
 	{(void *)&g_exp_wint, (void *)(t_fmt_arg_id[]){E_FMT_ARG_ID_WINT}},
 	{(void *)&g_exp_str, (void *)(t_fmt_arg_id[]){E_FMT_ARG_ID_STR}},
 	{(void *)&g_exp_wstr, (void *)(t_fmt_arg_id[]){E_FMT_ARG_ID_WSTR}},
@@ -143,7 +143,7 @@ static t_map_kv			g_arg_kvs[] =
 };
 static t_map			g_arg_map =
 {
-	.sz = sizeof(g_arg_kvs),
+	.sz = sizeof(g_arg_kvs) / sizeof(g_arg_kvs[0]),
 	.key_sz = sizeof(t_fmt_exp),
 	.val_sz = sizeof(t_fmt_arg_id),
 	.kvs = g_arg_kvs,

@@ -6,13 +6,13 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 06:51:39 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/23 22:03:26 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/25 05:48:35 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int			print_ulong(void *arg, t_fmt_exp *exp)
+int			print_ulong(t_fmt_exp *exp, va_list ap)
 {
-	return (print_uint(arg, exp));
+	return (print_uint(exp, ap));
 }

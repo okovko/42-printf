@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 06:58:54 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/23 22:05:30 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/25 05:55:22 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include "ft_printf.h"
 
-int			print_uintmax(void *arg, t_fmt_exp *exp)
+int			print_uintmax(t_fmt_exp *exp, va_list ap)
 {
-	return (print_ullong(arg, exp));
+	return (print_ullong(exp, ap));
 }

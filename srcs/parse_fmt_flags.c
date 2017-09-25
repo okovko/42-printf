@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 21:20:11 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/23 21:55:17 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/25 01:01:30 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static t_map_kv		g_flag_kvs[] = (t_map_kv[])
 };
 static t_map		g_flag_map =
 {
-	.sz = sizeof(g_flag_kvs),
+	.sz = sizeof(g_flag_kvs) / sizeof(g_flag_kvs[0]),
 	.key_sz = sizeof(char *),
 	.val_sz = sizeof(t_fmt_flag_bit),
 	.kvs = g_flag_kvs,

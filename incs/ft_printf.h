@@ -6,13 +6,14 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/14 03:44:40 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/24 15:56:51 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/25 05:31:17 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
+#include <stdarg.h>
 #include <stddef.h>
 #include <stdint.h>
 #include <wchar.h>
@@ -183,8 +184,8 @@ typedef struct		s_fmt_exp
 }					t_fmt_exp;
 
 typedef t_fmt_sym	(*t_parse_subspec_fp)(t_fmt_exp *, char *, char **);
-typedef int			(*t_print_arg_fp)(void *, t_fmt_exp *);
-typedef int			(*t_sz_arg_fp)(t_fmt_exp *);
+typedef int			(*t_print_arg_fp)(t_fmt_exp *, va_list);
+//typedef int			(*t_sz_arg_fp)(t_fmt_exp *);
 
 t_fmt_sym			parse_fmt_sym(t_fmt_exp *exp, t_fmt_sym sym,
 									char *loc, char **edg);
@@ -197,29 +198,29 @@ t_fmt_sym			parse_fmt_len(t_fmt_exp *exp, char *loc, char **edg);
 t_fmt_arg_id		parse_fmt_arg_id(t_fmt_exp *exp);
 t_map_kv			*parse_fmt_tok(t_map *mp, char *loc, char **edg);
 t_fmt_exp			*parse_fmt_exp(char *loc);
-int					print_ptr(void *arg, t_fmt_exp *exp);
-int					print_str(void *arg, t_fmt_exp *exp);
-int					print_char(void *arg, t_fmt_exp *exp);
-int					print_sint(void *arg, t_fmt_exp *exp);
-int					print_size(void *arg, t_fmt_exp *exp);
-int					print_uint(void *arg, t_fmt_exp *exp);
-int					print_wint(void *arg, t_fmt_exp *exp);
-int					print_wstr(void *arg, t_fmt_exp *exp);
-int					print_schar(void *arg, t_fmt_exp *exp);
-int					print_slong(void *arg, t_fmt_exp *exp);
-int					print_sshrt(void *arg, t_fmt_exp *exp);
-int					print_uchar(void *arg, t_fmt_exp *exp);
-int					print_ulong(void *arg, t_fmt_exp *exp);
-int					print_ushrt(void *arg, t_fmt_exp *exp);
-int					print_intmax(void *arg, t_fmt_exp *exp);
-int					print_sllong(void *arg, t_fmt_exp *exp);
-int					print_ullong(void *arg, t_fmt_exp *exp);
-int					print_ptrdiff(void *arg, t_fmt_exp *exp);
-int					print_uintmax(void *arg, t_fmt_exp *exp);
+int					print_ptr(t_fmt_exp *exp, va_list ap);
+int					print_str(t_fmt_exp *exp, va_list ap);
+int					print_char(t_fmt_exp *exp, va_list ap);
+int					print_sint(t_fmt_exp *exp, va_list ap);
+int					print_size(t_fmt_exp *exp, va_list ap);
+int					print_uint(t_fmt_exp *exp, va_list ap);
+int					print_wint(t_fmt_exp *exp, va_list ap);
+int					print_wstr(t_fmt_exp *exp, va_list ap);
+int					print_schar(t_fmt_exp *exp, va_list ap);
+int					print_slong(t_fmt_exp *exp, va_list ap);
+int					print_sshrt(t_fmt_exp *exp, va_list ap);
+int					print_uchar(t_fmt_exp *exp, va_list ap);
+int					print_ulong(t_fmt_exp *exp, va_list ap);
+int					print_ushrt(t_fmt_exp *exp, va_list ap);
+int					print_intmax(t_fmt_exp *exp, va_list ap);
+int					print_sllong(t_fmt_exp *exp, va_list ap);
+int					print_ullong(t_fmt_exp *exp, va_list ap);
+int					print_ptrdiff(t_fmt_exp *exp, va_list ap);
+int					print_uintmax(t_fmt_exp *exp, va_list ap);
 int					print_text_until_exp(char *loc, char **edg);
-int					ft_printf(const char *fmt, ...);
-int					print_ullong_base(void *arg, t_fmt_exp *exp, int base);
+int					print_ullong_base(t_fmt_exp *exp, int base, va_list ap);
+int					print_arg(const char *fmt, va_list ap);
 int					convert_nbr_pad(t_fmt_exp *exp, int sz, char **conv);
-int					print_arg(const char *fmt, void *arg);
+int					ft_printf(const char *fmt, ...);
 
 #endif

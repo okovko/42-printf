@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 06:28:39 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/24 02:38:04 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/25 05:47:10 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 #include "ft_printf.h"
 
-int		print_wint(void *arg, t_fmt_exp *exp)
+int		print_wint(t_fmt_exp *exp, va_list ap)
 {
-	(void)arg;
+	(void)ap;
 	(void)exp;
 	return(0);
 }

@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/08 19:46:46 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/23 22:02:47 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/25 05:47:39 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include "ft_printf.h"
 
-int		print_schar(void *arg, t_fmt_exp *exp)
+int		print_schar(t_fmt_exp *exp, va_list ap)
 {
-	return (print_sint(arg, exp));
+	return (print_sint(exp, ap));
 }

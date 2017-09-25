@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 16:24:38 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/23 22:01:05 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/25 05:35:34 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include "ft_printf.h"
 
-int		print_ptr(void *arg, t_fmt_exp *exp)
+int		print_ptr(t_fmt_exp *exp, va_list ap)
 {
-	return (print_ullong_base(arg, exp, 16));
+	return (print_ullong_base(exp, 16, ap));
 }

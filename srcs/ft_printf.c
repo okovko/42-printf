@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/14 03:43:23 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/24 13:53:15 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/24 20:02:56 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,6 @@
 
 #include "ft_printf.h"
 
-static char			*next_exp(const char *fmt)
-{
-	char	*next;
-
-	if (NULL == (next = ft_strchr(fmt, '%')))
-		return (NULL);
-	if ('%' == *(next + 1))
-		return (next_exp(fmt + 2));
-	return (next);
-}
-
 static int			count_exps(const char *fmt)
 {
 	int		ii;
@@ -39,16 +28,17 @@ static int			count_exps(const char *fmt)
 	char	*chk;
 
 	ii = 0;
-	chk = (char *)fmt;
-	while ('\0' != *(chk = ft_strchr(chk, '%')))
+	chk = ft_strchrnul(fmt, '%');
+	while ('\0' != *chk)
 	{
 		if ('%' == *(chk + 1))
 		{
-			chk += 2;
+			chk = ft_strchrnul(chk + 2, '%');
 			continue ;
 		}
 		ii++;
 		hit = chk;
+		chk = ft_strchrnul(chk + 1, '%');
 	}
 	return (ii);
 }
@@ -56,23 +46,20 @@ static int			count_exps(const char *fmt)
 int					ft_printf(const char *fmt, ...)
 {
 	int		ii;
-	void	*arg;
-	va_list	args;
-	int		arg_sz;
+	va_list	ap;
+	int		ap_sz;
 	int		sz;
 
 	sz = print_text_until_exp((char *)fmt, (char **)&fmt);
-	arg_sz = count_exps(fmt);
-	va_start(args, fmt);
+	ap_sz = count_exps(fmt);
+	va_start(ap, fmt);
 	ii = 0;
-	while (ii < arg_sz)
+	while (ii < ap_sz)
 	{
-		arg = va_arg(args, void *);
-		sz += print_arg(fmt, arg);
-		fmt = next_exp(fmt);
+		sz += print_arg(fmt, ap);
+		sz += print_text_until_exp((char *)fmt, (char **)&fmt);
 		ii++;
 	}
-	va_end(args);
-	sz += print_text_until_exp((char *)fmt, (char **)&fmt);
+	va_end(ap);
 	return (sz);
 }
