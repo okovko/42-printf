@@ -27,21 +27,21 @@ static t_map		g_width_map =
 t_fmt_sym			parse_fmt_width(t_fmt_exp *exp, char **fmt)
 {
 	t_map_kv		*kv;
-	char			**edg;
+	char			*edg;
 
-	edg = fmt;
-	exp->width = ft_strtoi_nol(*fmt, edg);
-	if (*fmt != *edg)
+	edg = *fmt;
+	if (NULL != (kv = parse_fmt_tok(&g_width_map, *fmt, &edg)))
 	{
-		*fmt = *edg;
-		exp->set |= E_FMT_EXP_SET_WIDTH;
-		return (E_FMT_SYM_WIDTH);
-	}
-	if (NULL != (kv = parse_fmt_tok(&g_width_map, *fmt, edg)))
-	{
-		*fmt = *edg;
+		*fmt = edg;
 		exp->set |= E_FMT_EXP_SET_WIDTH;
 		exp->width = *(t_fmt_width *)kv->val;
+		return (E_FMT_SYM_WIDTH);
+	}
+	exp->width = ft_strtoi_nol(*fmt, &edg);
+	if (*fmt != edg)
+	{
+		*fmt = edg;
+		exp->set |= E_FMT_EXP_SET_WIDTH;
 		return (E_FMT_SYM_WIDTH);
 	}
 	return (E_FMT_SYM_NONE);

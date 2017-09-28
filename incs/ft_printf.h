@@ -90,7 +90,6 @@ typedef enum		e_fmt_prec
 {
 	E_FMT_PREC_BEFORE = ~(~0u >> 1),
 	E_FMT_PREC_NONE = 0,
-	E_FMT_PREC_ZERO,
 }					t_fmt_prec;
 
 typedef enum		e_fmt_len
