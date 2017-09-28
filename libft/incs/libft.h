@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 11:29:19 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/24 15:11:17 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/27 21:21:50 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # define MAX(a, b) ((a) > (b) ? (a) : (b))
 # define MIN(a, b) ((a) > (b) ? (b) : (a))
 # define BIT_FLAG(n) (~(~0u << 1) << (n - 1))
+# define SMOD(x, r) ((x) >= 0 ? (int)((unsigned)(x) % (r)) : ((x) % (r)))
+# define PMOD(x, r) ((x) >= 0 ? (int)((unsigned)(x) % (r)) : ABS((x) % (r)))
 
 typedef struct		s_pz
 {
