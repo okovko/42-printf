@@ -15,28 +15,30 @@
 
 #include "ft_printf.h"
 
+/*
+	consider cleanup by using t_pz for ss and prnt
+*/
 static int		convert_str_pad(t_fmt_exp *exp, char *ss, char **prnt)
 {
 	int		sz;
-	char	*fmt;
+	int		ss_sz;
 	t_bool	left;
 	t_pz	pad;
 	t_pz	cpy;
 
-	sz = ft_strlen(ss);
-	sz = MAX(sz, (int)exp->width);
-	fmt = ft_walloc(sz);
+	ss_sz = ft_strlen(ss);
+	sz = MAX(ss_sz, (int)exp->width);
+	*prnt = ft_walloc(sz);
 	if (exp->set & E_FMT_EXP_SET_PREC)
-		cpy.sz = MIN(sz, (int)exp->prec);
+		cpy.sz = MIN(ss_sz, (int)exp->prec);
 	else
-		cpy.sz = sz;
+		cpy.sz = ss_sz;
 	pad.sz = sz - cpy.sz;
 	left = exp->flags & E_FMT_FLAG_BIT_LEFT_JUSTIFY;
-	cpy.p = left ? fmt : fmt + pad.sz;
-	pad.p = left ? fmt + cpy.sz : fmt;
+	cpy.p = left ? *prnt : *prnt + pad.sz;
+	pad.p = left ? *prnt + cpy.sz : *prnt;
 	ft_memcpy(cpy.p, ss, cpy.sz);
 	ft_memset(pad.p, ' ', pad.sz);
-	*prnt = fmt;
 	return (sz);
 }
 
