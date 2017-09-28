@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/24 15:52:37 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/27 18:34:00 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/28 02:25:55 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@ int				print_arg(char **fmt, va_list ap)
 	exp = parse_fmt_exp(fmt);
 	id = parse_fmt_arg_id(exp);
 	sz = g_print_arg_fp[id](exp, ap);
+	free(exp);
 	return (sz);
 }
