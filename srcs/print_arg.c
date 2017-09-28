@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+
 #include "ft_printf.h"
 
 static t_print_arg_fp	g_print_arg_fp[] = (t_print_arg_fp[])
