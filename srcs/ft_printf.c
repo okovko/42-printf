@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/14 03:43:23 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/24 20:02:56 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/27 18:32:16 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 
 #include "ft_printf.h"
 
+/*
+	better to count exps by using the spec map
+*/
 static int			count_exps(const char *fmt)
 {
 	int		ii;
@@ -47,14 +50,14 @@ int					ft_printf(const char *fmt, ...)
 	int		ap_sz;
 	int		sz;
 
-	sz = print_text_until_exp((char *)fmt, (char **)&fmt);
+	sz = print_text_until_exp((char **)&fmt);
 	ap_sz = count_exps(fmt);
 	va_start(ap, fmt);
 	ii = 0;
 	while (ii < ap_sz)
 	{
-		sz += print_arg(fmt, ap);
-		sz += print_text_until_exp((char *)fmt, (char **)&fmt);
+		sz += print_arg((char **)&fmt, ap);
+		sz += print_text_until_exp((char **)&fmt);
 		ii++;
 	}
 	va_end(ap);

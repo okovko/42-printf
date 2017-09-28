@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 21:21:22 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/25 01:04:40 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/27 21:17:16 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,15 @@ static t_map		g_len_map =
 	.kvs = g_len_kvs,
 };
 
-t_fmt_sym			parse_fmt_len(t_fmt_exp *exp,
-									char *loc, char **edg)
+t_fmt_sym			parse_fmt_len(t_fmt_exp *exp, char **fmt)
 {
 	t_map_kv		*kv;
+	char			**edg;
 
-	if (NULL != (kv = parse_fmt_tok(&g_len_map, loc, edg)))
+	edg = fmt;
+	if (NULL != (kv = parse_fmt_tok(&g_len_map, *fmt, edg)))
 	{
+		*fmt = *edg;
 		exp->set |= E_FMT_EXP_SET_LEN;
 		exp->len = *(t_fmt_len *)kv->val;
 	}

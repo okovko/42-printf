@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/14 03:44:40 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/25 05:31:17 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/27 18:37:07 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,21 +183,10 @@ typedef struct		s_fmt_exp
 	t_fmt_spec		spec;
 }					t_fmt_exp;
 
-typedef t_fmt_sym	(*t_parse_subspec_fp)(t_fmt_exp *, char *, char **);
+typedef t_fmt_sym	(*t_parse_subspec_fp)(t_fmt_exp *, char **);
 typedef int			(*t_print_arg_fp)(t_fmt_exp *, va_list);
 //typedef int			(*t_sz_arg_fp)(t_fmt_exp *);
 
-t_fmt_sym			parse_fmt_sym(t_fmt_exp *exp, t_fmt_sym sym,
-									char *loc, char **edg);
-t_fmt_sym			parse_fmt_spec(t_fmt_exp *exp, char *loc, char **edg);
-t_fmt_sym			parse_fmt_pass(t_fmt_exp *exp, char *loc, char **edg);
-t_fmt_sym			parse_fmt_prec(t_fmt_exp *exp, char *loc, char **edg);
-t_fmt_sym			parse_fmt_flags(t_fmt_exp *exp, char *loc, char **edg);
-t_fmt_sym			parse_fmt_width(t_fmt_exp *exp, char *loc, char **edg);
-t_fmt_sym			parse_fmt_len(t_fmt_exp *exp, char *loc, char **edg);
-t_fmt_arg_id		parse_fmt_arg_id(t_fmt_exp *exp);
-t_map_kv			*parse_fmt_tok(t_map *mp, char *loc, char **edg);
-t_fmt_exp			*parse_fmt_exp(char *loc);
 int					print_ptr(t_fmt_exp *exp, va_list ap);
 int					print_str(t_fmt_exp *exp, va_list ap);
 int					print_char(t_fmt_exp *exp, va_list ap);
@@ -217,9 +206,19 @@ int					print_sllong(t_fmt_exp *exp, va_list ap);
 int					print_ullong(t_fmt_exp *exp, va_list ap);
 int					print_ptrdiff(t_fmt_exp *exp, va_list ap);
 int					print_uintmax(t_fmt_exp *exp, va_list ap);
-int					print_text_until_exp(char *loc, char **edg);
 int					print_ullong_base(t_fmt_exp *exp, int base, va_list ap);
-int					print_arg(const char *fmt, va_list ap);
+int					print_text_until_exp(char **fmt);
+int					print_arg(char **fmt, va_list ap);
+t_fmt_sym			parse_fmt_sym(t_fmt_exp *exp, char **fmt, t_fmt_sym sym);
+t_fmt_sym			parse_fmt_spec(t_fmt_exp *exp, char **fmt);
+t_fmt_sym			parse_fmt_pass(t_fmt_exp *exp, char **fmt);
+t_fmt_sym			parse_fmt_prec(t_fmt_exp *exp, char **fmt);
+t_fmt_sym			parse_fmt_flags(t_fmt_exp *exp, char **fmt);
+t_fmt_sym			parse_fmt_width(t_fmt_exp *exp, char **fmt);
+t_fmt_sym			parse_fmt_len(t_fmt_exp *exp, char **fmt);
+t_fmt_arg_id		parse_fmt_arg_id(t_fmt_exp *exp);
+t_map_kv			*parse_fmt_tok(t_map *mp, char *loc, char **edg);
+t_fmt_exp			*parse_fmt_exp(char **fmt);
 int					convert_nbr_pad(t_fmt_exp *exp, int sz, char **conv);
 int					ft_printf(const char *fmt, ...);
 

@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 21:20:48 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/25 01:06:17 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/27 18:43:52 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,22 @@ static t_map		g_width_map =
 	.kvs = g_width_kvs,
 };
 
-t_fmt_sym			parse_fmt_width(t_fmt_exp *exp,
-									char *loc, char **edg)
+t_fmt_sym			parse_fmt_width(t_fmt_exp *exp, char **fmt)
 {
 	t_map_kv		*kv;
+	char			**edg;
 
-	exp->width = ft_strtoi_nol(loc, edg);
-	if (loc != *edg)
+	edg = fmt;
+	exp->width = ft_strtoi_nol(*fmt, edg);
+	if (*fmt != *edg)
 	{
+		*fmt = *edg;
 		exp->set |= E_FMT_EXP_SET_WIDTH;
 		return (E_FMT_SYM_WIDTH);
 	}
-	if (NULL != (kv = parse_fmt_tok(&g_width_map, loc, edg)))
+	if (NULL != (kv = parse_fmt_tok(&g_width_map, *fmt, edg)))
 	{
+		*fmt = *edg;
 		exp->set |= E_FMT_EXP_SET_WIDTH;
 		exp->width = *(t_fmt_width *)kv->val;
 		return (E_FMT_SYM_WIDTH);

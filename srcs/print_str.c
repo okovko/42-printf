@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/22 15:59:45 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/25 05:35:52 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/27 18:38:00 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include "ft_printf.h"
 
-static int		fmt(t_fmt_exp *exp, char *ss, char **prnt)
+static int		convert_str_pad(t_fmt_exp *exp, char *ss, char **prnt)
 {
 	int		sz;
 	char	*fmt;
@@ -45,7 +45,7 @@ int		print_str(t_fmt_exp *exp, va_list ap)
 	char	*prnt;
 	int		sz;
 
-	sz = fmt(exp, va_arg(ap, char *), &prnt);
+	sz = convert_str_pad(exp, va_arg(ap, char *), &prnt);
 	write(1, prnt, sz);
 	free(prnt);
 	return (sz);

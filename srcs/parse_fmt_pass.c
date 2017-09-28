@@ -6,17 +6,15 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 21:19:22 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/25 01:04:52 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/27 21:11:36 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-t_fmt_sym		parse_fmt_pass(t_fmt_exp *exp,
-								char *loc, char **edg)
+t_fmt_sym		parse_fmt_pass(t_fmt_exp *exp, char **fmt)
 {
 	(void)exp;
-	loc++;
-	*edg = loc;
+	(*fmt)++;
 	return (E_FMT_SYM_NONE);
 }

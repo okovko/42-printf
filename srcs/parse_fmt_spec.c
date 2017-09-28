@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 21:21:50 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/25 01:05:07 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/27 21:19:01 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,15 @@ static t_map		g_spec_map =
 	.kvs = g_spec_kvs,
 };
 
-t_fmt_sym			parse_fmt_spec(t_fmt_exp *exp,
-									char *loc, char **edg)
+t_fmt_sym			parse_fmt_spec(t_fmt_exp *exp, char **fmt)
 {
 	t_map_kv	*kv;
+	char		**edg;
 
-	if (NULL != (kv = parse_fmt_tok(&g_spec_map, loc, edg)))
+	edg = fmt;
+	if (NULL != (kv = parse_fmt_tok(&g_spec_map, *fmt, edg)))
 	{
+		*fmt = *edg;
 		exp->set |= E_FMT_EXP_SET_SPEC;
 		exp->spec = *(t_fmt_spec *)kv->val;
 	}

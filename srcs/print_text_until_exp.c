@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 21:14:55 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/24 23:39:01 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/27 21:05:18 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,13 @@ static int	print_buf(void)
 	return (sz);
 }
 
-int			print_text_until_exp(char *loc, char **edg)
+int			print_text_until_exp(char **edg)
 {
 	int		sz;
 	char	cc;
+	char	*loc;
 
+	loc = *edg;
 	sz = 0;
 	while (((cc = *loc) && '%' != cc) || ('%' == cc && '%' == *(loc + 1)))
 	{

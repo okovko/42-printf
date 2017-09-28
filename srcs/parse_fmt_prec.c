@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 21:21:05 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/25 01:04:56 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/27 21:15:56 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,22 @@ static t_map		g_prec_map =
 	.kvs = g_prec_kvs,
 };
 
-t_fmt_sym			parse_fmt_prec(t_fmt_exp *exp,
-									char *loc, char **edg)
+t_fmt_sym			parse_fmt_prec(t_fmt_exp *exp, char **fmt)
 {
 	t_map_kv		*kv;
+	char			**edg;
 
-	exp->prec = ft_strtoi_nol(loc, edg);
-	if (loc != *edg)
+	edg = fmt;
+	exp->prec = ft_strtoi_nol(*fmt, edg);
+	if (*fmt != *edg)
 	{
+		*fmt = *edg;
 		exp->set |= E_FMT_EXP_SET_PREC;
 		return (E_FMT_SYM_PREC);
 	}
-	if (NULL != (kv = parse_fmt_tok(&g_prec_map, loc, edg)))
+	if (NULL != (kv = parse_fmt_tok(&g_prec_map, *fmt, edg)))
 	{
+		*fmt = *edg;
 		exp->set |= E_FMT_EXP_SET_PREC;
 		exp->prec = *(t_fmt_prec *)kv->val;
 		return (E_FMT_SYM_WIDTH);
