@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 21:22:56 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/27 18:34:10 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/28 02:25:12 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_fmt_exp			*parse_fmt_exp(char **fmt)
 	t_fmt_exp		*exp;
 
 	(*fmt)++;
-	exp = ft_walloc(sizeof(exp));
+	exp = ft_walloc(sizeof(*exp));
 	*exp = (const t_fmt_exp){.flags = 0};
 	sym = E_FMT_SYM_NONE;
 	while ('\0' != **fmt && E_FMT_SYM_SPEC != sym)
