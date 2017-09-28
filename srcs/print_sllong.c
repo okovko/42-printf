@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 06:09:45 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/28 01:47:35 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/28 02:12:38 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int			convert_nbr_pad(t_fmt_exp *exp, int sz, char **conv)
 	if (!left && exp->flags & E_FMT_FLAG_BIT_LEFT_PAD_ZEROES)
 		cc = '0';
 	pad.sz = (int)exp->width > sz ? exp->width - sz : 0;
-	pad.p = ft_walloc(sz);
+	pad.p = ft_walloc(pad.sz);
 	ft_memset(pad.p, cc, pad.sz);
 	*conv = pad.p;
 	return (pad.sz);
