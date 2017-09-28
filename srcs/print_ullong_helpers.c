@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 06:17:33 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/25 05:51:29 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/28 01:55:27 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,7 @@ int			print_ullong_base(t_fmt_exp *exp, int base, va_list ap)
 		write(1, pad.p, pad.sz);
 		write(1, nbr.p, nbr.sz);
 	}
+	free(pad.p);
+	free(nbr.p);
 	return (pad.sz + nbr.sz);
 }

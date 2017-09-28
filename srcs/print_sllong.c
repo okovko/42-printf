@@ -70,16 +70,11 @@ int			convert_nbr_pad(t_fmt_exp *exp, int sz, char **conv)
 	t_pz	pad;
 	t_bool	left;
 
-	if (!((int)exp->width > sz))
-	{
-		*conv = ft_strdup("");
-		return (0);
-	}
 	left = exp->flags & E_FMT_FLAG_BIT_LEFT_JUSTIFY;
 	cc = ' ';
 	if (!left && exp->flags & E_FMT_FLAG_BIT_LEFT_PAD_ZEROES)
 		cc = '0';
-	pad.sz = exp->width - sz;
+	pad.sz = (int)exp->width > sz ? exp->width - sz : 0;
 	pad.p = ft_walloc(sz);
 	ft_memset(pad.p, cc, pad.sz);
 	*conv = pad.p;
@@ -105,5 +100,7 @@ int				print_sllong(t_fmt_exp *exp, va_list ap)
 		write(1, pad.p, pad.sz);
 		write(1, nbr.p, nbr.sz);
 	}
+	free(pad.p);
+	free(nbr.p);
 	return (pad.sz + nbr.sz);
 }
