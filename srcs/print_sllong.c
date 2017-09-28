@@ -52,12 +52,7 @@ static int		convert_sllong(t_fmt_exp *exp, long long val, char **conv)
 	char			cc;
 	int				sz;
 
-	if (val == 0 && exp->prec == 0)
-	{
-		*conv = ft_strdup("");
-		return (0);
-	}
-	sz = ft_diglen(val);
+	sz = val == 0 && exp->prec == 0 ? 0 : ft_diglen(val);
 	sz = MAX(sz, (int)exp->prec);
 	if ((cc = sllong_sign(exp, val)))
 		sz++;
