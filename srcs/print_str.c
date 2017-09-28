@@ -13,7 +13,6 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-#include "libft.h"
 #include "ft_printf.h"
 
 static int		convert_str_pad(t_fmt_exp *exp, t_pz ss, char **prnt)
