@@ -185,7 +185,6 @@ typedef struct		s_fmt_exp
 
 typedef t_fmt_sym	(*t_parse_subspec_fp)(t_fmt_exp *, char **);
 typedef int			(*t_print_arg_fp)(t_fmt_exp *, va_list);
-//typedef int			(*t_sz_arg_fp)(t_fmt_exp *);
 
 int					print_ptr(t_fmt_exp *exp, va_list ap);
 int					print_str(t_fmt_exp *exp, va_list ap);
