@@ -6,13 +6,14 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/22 15:59:45 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/27 18:38:00 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/28 02:12:43 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
 
+#include "libft.h"
 #include "ft_printf.h"
 
 static int		convert_str_pad(t_fmt_exp *exp, t_pz ss, char **prnt)
