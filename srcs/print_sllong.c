@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 06:09:45 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/27 18:38:08 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/28 01:47:35 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int			convert_nbr_pad(t_fmt_exp *exp, int sz, char **conv)
 	pad.p = ft_walloc(sz);
 	ft_memset(pad.p, cc, pad.sz);
 	*conv = pad.p;
-	return (sz);
+	return (pad.sz);
 }
 
 int				print_sllong(t_fmt_exp *exp, va_list ap)
