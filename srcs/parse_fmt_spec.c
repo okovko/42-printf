@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 21:21:50 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/28 18:59:28 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/29 01:47:50 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,12 @@ t_fmt_sym			parse_fmt_spec(t_fmt_exp *exp, char **fmt)
 {
 	t_map_kv	*kv;
 	char		cc;
-	char		**edg;
+	char		*edg;
 
-	edg = fmt;
-	if (NULL != (kv = parse_fmt_tok(&g_spec_map, *fmt, edg)))
+	edg = *fmt;
+	if (NULL != (kv = parse_fmt_tok(&g_spec_map, *fmt, &edg)))
 	{
-		*fmt = *edg;
+		*fmt = edg;
 		exp->set |= E_FMT_SET_SPEC;
 		exp->spec = *(t_fmt_spec *)kv->val;
 		exp->base = parse_base(kv);
@@ -95,5 +95,5 @@ t_fmt_sym			parse_fmt_spec(t_fmt_exp *exp, char **fmt)
 		if ('p' == cc)
 			exp->flags |= E_FMT_FLAG_BIT_HASH_OVERLOADED;
 	}
-	return (NULL == kv ? E_FMT_SYM_NONE : E_FMT_SYM_SPEC);
+	return (NULL == kv ? E_FMT_SYM_END : E_FMT_SYM_SPEC);
 }

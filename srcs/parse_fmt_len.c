@@ -34,12 +34,12 @@ static t_map		g_len_map =
 t_fmt_sym			parse_fmt_len(t_fmt_exp *exp, char **fmt)
 {
 	t_map_kv		*kv;
-	char			**edg;
+	char			*edg;
 
-	edg = fmt;
-	if (NULL != (kv = parse_fmt_tok(&g_len_map, *fmt, edg)))
+	edg = *fmt;
+	if (NULL != (kv = parse_fmt_tok(&g_len_map, *fmt, &edg)))
 	{
-		*fmt = *edg;
+		*fmt = edg;
 		exp->set |= E_FMT_SET_LEN;
 		exp->len = *(t_fmt_len *)kv->val;
 	}

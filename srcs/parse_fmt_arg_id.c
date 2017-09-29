@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 21:22:40 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/28 18:59:43 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/29 01:52:17 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,8 @@ t_fmt_arg_id		parse_fmt_arg_id(t_fmt_exp *exp)
 	t_fmt_arg_id	id;
 
 	kv = ft_mapget(&g_arg_map, (void *)exp, map_keycmp_exp_spec_len);
+	if (NULL == kv)
+		return (E_FMT_ARG_ID_NONE);
 	id = *(t_fmt_arg_id *)kv->val;
 	return (id);
 }

@@ -31,16 +31,16 @@ static t_map		g_flag_map =
 t_fmt_sym			parse_fmt_flags(t_fmt_exp *exp, char **fmt)
 {
 	t_map_kv		*kv;
-	char			**edg;
+	char			*edg;
 
-	edg = fmt;
-	if (NULL != (kv = parse_fmt_tok(&g_flag_map, *fmt, edg)))
+	edg = *fmt;
+	if (NULL != (kv = parse_fmt_tok(&g_flag_map, *fmt, &edg)))
 		exp->set |= E_FMT_SET_FLAGS;
 	while (NULL != kv)
 	{
-		*fmt = *edg;
+		*fmt = edg;
 		exp->flags |= *(t_fmt_flag_bit *)kv->val;
-		kv = parse_fmt_tok(&g_flag_map, *fmt, edg);
+		kv = parse_fmt_tok(&g_flag_map, *fmt, &edg);
 	}
 	return (exp->flags == 0 ? E_FMT_SYM_NONE : E_FMT_SYM_FLAG);
 }

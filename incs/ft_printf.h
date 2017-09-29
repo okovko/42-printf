@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/14 03:44:40 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/28 18:32:24 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/29 01:52:36 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef enum		e_fmt_sym
 	E_FMT_SYM_PREC,
 	E_FMT_SYM_LEN,
 	E_FMT_SYM_SPEC,
+	E_FMT_SYM_END,
 }					t_fmt_sym;
 
 typedef enum		e_fmt_flag_bit
@@ -148,6 +149,7 @@ typedef struct		s_fmt_exp
 typedef t_fmt_sym	(*t_parse_subspec_fp)(t_fmt_exp *, char **);
 typedef int			(*t_print_arg_fp)(t_fmt_exp *, va_list);
 
+int					print_nothing(t_fmt_exp *exp, va_list ap);
 int					print_ptr(t_fmt_exp *exp, va_list ap);
 int					print_str(t_fmt_exp *exp, va_list ap);
 int					print_char(t_fmt_exp *exp, va_list ap);

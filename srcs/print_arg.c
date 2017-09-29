@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/24 15:52:37 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/28 18:33:30 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/29 01:31:57 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 static t_print_arg_fp	g_print_arg_fp[] = (t_print_arg_fp[])
 {
-	[E_FMT_ARG_ID_NONE] = NULL,
+	[E_FMT_ARG_ID_NONE] = print_nothing,
 	[E_FMT_ARG_ID_SCHAR] = print_schar,
 	[E_FMT_ARG_ID_UCHAR] = print_uchar,
 	[E_FMT_ARG_ID_SSHRT] = print_sshrt,

@@ -1,18 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   print_nothing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/07 11:29:19 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/28 22:13:54 by olkovale         ###   ########.fr       */
+/*   Created: 2017/09/29 02:02:44 by olkovale          #+#    #+#             */
+/*   Updated: 2017/09/29 02:02:44 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdlib.h>
 
-int		ft_isalpha(int cc)
+#include "ft_printf.h"
+
+int		print_nothing(t_fmt_exp *exp, va_list ap)
 {
-	return ((cc >= 'a' && cc <= 'z') || (cc >= 'A' && cc <= 'Z'));
+	(void) exp;
+	(void) ap;
+	return (0);
 }
