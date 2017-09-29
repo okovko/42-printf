@@ -92,6 +92,8 @@ t_fmt_sym			parse_fmt_spec(t_fmt_exp *exp, char **fmt)
 		cc = *(char *)kv->key;
 		if (ft_isupper(cc))
 			exp->flags |= E_FMT_FLAG_BIT_UPPER;
+		if ('p' == cc)
+			exp->flags |= E_FMT_FLAG_BIT_HASH_OVERLOADED;
 	}
 	return (NULL == kv ? E_FMT_SYM_NONE : E_FMT_SYM_SPEC);
 }
