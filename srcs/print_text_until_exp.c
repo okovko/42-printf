@@ -14,19 +14,6 @@
 
 #include "ft_printf.h"
 
-static char	g_buf[4096] = {0};
-static int	g_itr = 0;
-
-static int	print_buf(void)
-{
-	int		sz;
-
-	sz = g_itr;
-	write(1, g_buf, g_itr);
-	g_itr = 0;
-	return (sz);
-}
-
 int			print_text_until_exp(char **edg)
 {
 	int		sz;
@@ -37,18 +24,10 @@ int			print_text_until_exp(char **edg)
 	sz = 0;
 	while (((cc = *loc) && '%' != cc) || ('%' == cc && '%' == *(loc + 1)))
 	{
-		if ((unsigned)g_itr < sizeof(g_buf))
-		{
-			g_buf[g_itr] = cc;
-			g_itr++;
-			loc++;
-			if ('%' == cc)
-				loc++;
-		}
-		else
-			sz += print_buf();
+		write(1, &cc, 1);
+		sz++;
+		loc++;
 	}
-	sz += print_buf();
 	*edg = loc;
 	return (sz);
 }

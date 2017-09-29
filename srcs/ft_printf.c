@@ -50,14 +50,14 @@ int					ft_printf(const char *fmt, ...)
 	int		ap_sz;
 	int		sz;
 
-	//sz = print_text_until_exp((char **)&fmt);
+	sz = print_text_until_exp((char **)&fmt);
 	ap_sz = count_exps(fmt);
 	va_start(ap, fmt);
 	ii = 0;
 	while (ii < ap_sz)
 	{
 		sz += print_arg((char **)&fmt, ap);
-		//sz += print_text_until_exp((char **)&fmt);
+		sz += print_text_until_exp((char **)&fmt);
 		ii++;
 	}
 	va_end(ap);
