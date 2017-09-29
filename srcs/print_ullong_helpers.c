@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 06:17:33 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/28 01:55:27 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/28 19:22:07 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ static char		*convert_ullong_base_helper(t_pz in, unsigned long long val,
 
 	ss = in.p;
 	sz = in.sz;
+	sz--;
 	while (val)
 	{
 		if (upper)
@@ -71,8 +72,11 @@ static char		*convert_ullong_base_helper(t_pz in, unsigned long long val,
 		val /= base;
 		sz--;
 	}
-	while (sz-- && '\0' == ss[sz])
+	while (sz >= 0)
+	{
 		ss[sz] = '0';
+		sz--;
+	}
 	return (ss);
 }
 
@@ -84,13 +88,8 @@ static int		convert_ullong_base(t_fmt_exp *exp, unsigned long long val,
 	t_bool			upper;
 	t_pz			ss_and_sz;
 
-	if (val == 0 && exp->prec == 0)
-	{
-		*conv = ft_strdup("");
-		return (0);
-	}
 	upper = exp->spec == E_FMT_SPEC_HEX_UPPER;
-	sz = ft_udiglen(val);
+	sz = val == 0 && exp->prec == 0 ? 0 : ft_udiglen(val);
 	sz = MAX(sz, (int)exp->prec) + ullong_prefix_sz(exp, val);
 	ss = ft_walloc(sz);
 	ss_and_sz = (t_pz){.p = ss, .sz = sz};
