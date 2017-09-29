@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 21:21:05 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/28 21:32:43 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/29 02:37:44 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static t_map		g_prec_map =
 	.kvs = g_prec_kvs,
 };
 
-t_fmt_sym			parse_fmt_prec(t_fmt_exp *exp, char **fmt)
+t_fmt_sym			parse_fmt_prec(t_fmt_exp *exp, char **fmt, va_list ap)
 {
 	t_map_kv		*kv;
 	char			*edg;
@@ -36,7 +36,9 @@ t_fmt_sym			parse_fmt_prec(t_fmt_exp *exp, char **fmt)
 		*fmt = edg;
 		exp->set |= E_FMT_SET_PREC;
 		exp->prec = *(t_fmt_prec *)kv->val;
-		if (exp->prec != E_FMT_PREC_NONE)
+		if (E_FMT_PREC_BEFORE == exp->prec)
+			exp->prec = va_arg(ap, long long);
+		if (E_FMT_PREC_NONE != exp->prec)
 			return (E_FMT_SYM_PREC);
 	}
 	exp->prec = ft_strtoi_nol(*fmt, &edg);

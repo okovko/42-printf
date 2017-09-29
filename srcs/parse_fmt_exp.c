@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-t_fmt_exp			*parse_fmt_exp(char **fmt)
+t_fmt_exp			*parse_fmt_exp(char **fmt, va_list ap)
 {
 	t_fmt_sym		sym;
 	t_fmt_exp		*exp;
@@ -23,7 +23,7 @@ t_fmt_exp			*parse_fmt_exp(char **fmt)
 	sym = E_FMT_SYM_NONE;
 	while ('\0' != **fmt)
 	{
-		sym = parse_fmt_sym(exp, fmt, sym);
+		sym = parse_fmt_sym(exp, fmt, sym, ap);
 		if (E_FMT_SYM_SPEC == sym || E_FMT_SYM_END == sym)
 			break ;
 	}

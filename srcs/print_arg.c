@@ -44,7 +44,7 @@ int				print_arg(char **fmt, va_list ap)
 	t_fmt_arg_id	id;
 	int				sz;
 
-	exp = parse_fmt_exp(fmt);
+	exp = parse_fmt_exp(fmt, ap);
 	id = parse_fmt_arg_id(exp);
 	sz = g_print_arg_fp[id](exp, ap);
 	free(exp);

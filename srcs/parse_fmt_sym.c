@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 21:22:10 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/27 18:35:21 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/29 01:32:16 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static t_parse_subspec_fp	g_parse_subspec_fp[] =
 };
 
 t_fmt_sym					parse_fmt_sym(t_fmt_exp *exp, char **fmt,
-											t_fmt_sym sym)
+											t_fmt_sym sym, va_list ap)
 {
 	int			ii;
 	int			sz;
@@ -32,7 +32,7 @@ t_fmt_sym					parse_fmt_sym(t_fmt_exp *exp, char **fmt,
 	ii = sym + 1;
 	while (ii < sz)
 	{
-		if (E_FMT_SYM_NONE != g_parse_subspec_fp[ii](exp, fmt))
+		if (E_FMT_SYM_NONE != g_parse_subspec_fp[ii](exp, fmt, ap))
 			return (ii);
 		ii++;
 	}

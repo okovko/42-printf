@@ -74,12 +74,13 @@ static int			parse_base(t_map_kv *kv)
 	return (0);
 }
 
-t_fmt_sym			parse_fmt_spec(t_fmt_exp *exp, char **fmt)
+t_fmt_sym			parse_fmt_spec(t_fmt_exp *exp, char **fmt, va_list ap)
 {
 	t_map_kv	*kv;
 	char		cc;
 	char		*edg;
 
+	(void)ap;
 	edg = *fmt;
 	if (NULL != (kv = parse_fmt_tok(&g_spec_map, *fmt, &edg)))
 	{

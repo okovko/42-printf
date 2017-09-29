@@ -16,7 +16,7 @@
 
 int		print_nothing(t_fmt_exp *exp, va_list ap)
 {
-	(void) exp;
-	(void) ap;
+	(void)exp;
+	(void)ap;
 	return (0);
 }
