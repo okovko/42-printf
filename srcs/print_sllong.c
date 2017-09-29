@@ -73,7 +73,7 @@ int			convert_nbr_pad(t_fmt_exp *exp, int sz, char **conv)
 	t_bool	zeroes;
 
 	left = exp->flags & E_FMT_FLAG_BIT_LEFT_JUSTIFY;
-	prec = exp->set & E_FMT_EXP_SET_PREC;
+	prec = exp->set & E_FMT_SET_PREC;
 	zeroes = exp->flags & E_FMT_FLAG_BIT_LEFT_PAD_ZEROES;
 	cc = ' ';
 	if (!left && !prec && zeroes)

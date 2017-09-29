@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 11:29:19 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/28 02:12:16 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/28 21:43:49 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int					ft_strtoklen(const char *ss, const char *dlm);
 int					ft_atoi(const char *ss);
 int					ft_strtoi_nol(const char *ss, char **endptr);
 int					ft_isalpha(int cc);
+int					ft_isupper(char cc);
 int					ft_isdigit(int cc);
 int					ft_isalnum(int cc);
 int					ft_isascii(int cc);

@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/22 15:59:45 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/28 02:12:43 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/28 21:32:38 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int		convert_str_pad(t_fmt_exp *exp, t_pz ss, char **prnt)
 
 	sz = MAX(ss.sz, (int)exp->width);
 	*prnt = ft_walloc(sz);
-	if (exp->set & E_FMT_EXP_SET_PREC)
+	if (exp->set & E_FMT_SET_PREC)
 		cpy.sz = MIN(ss.sz, (int)exp->prec);
 	else
 		cpy.sz = ss.sz;

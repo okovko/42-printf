@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   ft_isupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/07 11:29:19 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/28 21:42:23 by olkovale         ###   ########.fr       */
+/*   Created: 2017/09/28 21:42:32 by olkovale          #+#    #+#             */
+/*   Updated: 2017/09/28 21:42:32 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_isalnum(int cc)
+int		ft_isupper(char cc)
 {
-	return (ft_isdigit(cc) || ft_isalpha(cc));
+	return (cc >= 'A' && cc <= 'Z');
 }

@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 21:20:48 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/27 18:43:52 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/28 21:31:54 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_fmt_sym			parse_fmt_width(t_fmt_exp *exp, char **fmt)
 	if (NULL != (kv = parse_fmt_tok(&g_width_map, *fmt, &edg)))
 	{
 		*fmt = edg;
-		exp->set |= E_FMT_EXP_SET_WIDTH;
+		exp->set |= E_FMT_SET_WIDTH;
 		exp->width = *(t_fmt_width *)kv->val;
 		return (E_FMT_SYM_WIDTH);
 	}
@@ -41,7 +41,7 @@ t_fmt_sym			parse_fmt_width(t_fmt_exp *exp, char **fmt)
 	if (*fmt != edg)
 	{
 		*fmt = edg;
-		exp->set |= E_FMT_EXP_SET_WIDTH;
+		exp->set |= E_FMT_SET_WIDTH;
 		return (E_FMT_SYM_WIDTH);
 	}
 	return (E_FMT_SYM_NONE);

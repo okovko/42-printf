@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/14 03:44:40 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/28 02:12:19 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/28 18:32:24 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,46 +30,6 @@ typedef enum		e_fmt_sym
 	E_FMT_SYM_SPEC,
 }					t_fmt_sym;
 
-typedef enum		e_fmt_tok
-{
-	E_FMT_TOK_NONE,
-	E_FMT_TOK_FLAG_LEFT_JUSTIFY,
-	E_FMT_TOK_FLAG_FORCE_SIGN,
-	E_FMT_TOK_FLAG_SPACE_SIGN,
-	E_FMT_TOK_FLAG_HASH_OVERLOADED,
-	E_FMT_TOK_FLAG_LEFT_PAD_ZEROES,
-	E_FMT_TOK_WIDTH_NUM,
-	E_FMT_TOK_WIDTH_BEFORE,
-	E_FMT_TOK_PREC_NUM,
-	E_FMT_TOK_PREC_BEFORE,
-	E_FMT_TOK_LEN_CHAR,
-	E_FMT_TOK_LEN_SHRT,
-	E_FMT_TOK_LEN_LONG,
-	E_FMT_TOK_LEN_LLONG,
-	E_FMT_TOK_LEN_INTMAX,
-	E_FMT_TOK_LEN_SIZE,
-	E_FMT_TOK_LEN_PTRDIFF,
-	E_FMT_TOK_LEN_LONG_DOUBLE,
-	E_FMT_TOK_SPEC_INT,
-	E_FMT_TOK_SPEC_UINT,
-	E_FMT_TOK_SPEC_OCTAL,
-	E_FMT_TOK_SPEC_HEX,
-	E_FMT_TOK_SPEC_HEX_UPPER,
-	E_FMT_TOK_SPEC_FLOAT,
-	E_FMT_TOK_SPEC_FLOAT_UPPER,
-	E_FMT_TOK_SPEC_EXP,
-	E_FMT_TOK_SPEC_EXP_UPPER,
-	E_FMT_TOK_SPEC_FLOAT_OR_EXP,
-	E_FMT_TOK_SPEC_FLOAT_OR_EXP_UPPER,
-	E_FMT_TOK_SPEC_HEX_FLOAT,
-	E_FMT_TOK_SPEC_HEX_FLOAT_UPPER,
-	E_FMT_TOK_SPEC_CHAR,
-	E_FMT_TOK_SPEC_STR,
-	E_FMT_TOK_SPEC_PTR,
-	E_FMT_TOK_SPEC_N_PTR,
-	E_FMT_TOK_SPEC_PERCENT,
-}					t_fmt_tok;
-
 typedef enum		e_fmt_flag_bit
 {
 	E_FMT_FLAG_BIT_NONE,
@@ -78,6 +38,7 @@ typedef enum		e_fmt_flag_bit
 	E_FMT_FLAG_BIT_SPACE_SIGN = BIT_FLAG(3),
 	E_FMT_FLAG_BIT_HASH_OVERLOADED = BIT_FLAG(4),
 	E_FMT_FLAG_BIT_LEFT_PAD_ZEROES = BIT_FLAG(5),
+	E_FMT_FLAG_BIT_UPPER = BIT_FLAG(6),
 }					t_fmt_flag_bit;
 
 typedef enum		e_fmt_width
@@ -164,17 +125,19 @@ typedef enum		e_fmt_arg_id
 
 typedef enum		e_fmt_exp_set
 {
-	E_FMT_EXP_SET_NONE = 0,
-	E_FMT_EXP_SET_FLAGS = BIT_FLAG(1),
-	E_FMT_EXP_SET_WIDTH = BIT_FLAG(2),
-	E_FMT_EXP_SET_PREC = BIT_FLAG(3),
-	E_FMT_EXP_SET_LEN = BIT_FLAG(4),
-	E_FMT_EXP_SET_SPEC = BIT_FLAG(5),
+	E_FMT_SET_NONE = 0,
+	E_FMT_SET_FLAGS = BIT_FLAG(1),
+	E_FMT_SET_WIDTH = BIT_FLAG(2),
+	E_FMT_SET_PREC = BIT_FLAG(3),
+	E_FMT_SET_LEN = BIT_FLAG(4),
+	E_FMT_SET_SPEC = BIT_FLAG(5),
+	E_FMT_SET_BASE = BIT_FLAG(6),
 }					t_fmt_exp_set;
 
 typedef struct		s_fmt_exp
 {
 	int				set;
+	int				base;
 	int				flags;
 	t_fmt_width		width;
 	t_fmt_prec		prec;

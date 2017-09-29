@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 21:21:22 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/27 21:17:16 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/28 21:32:19 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_fmt_sym			parse_fmt_len(t_fmt_exp *exp, char **fmt)
 	if (NULL != (kv = parse_fmt_tok(&g_len_map, *fmt, edg)))
 	{
 		*fmt = *edg;
-		exp->set |= E_FMT_EXP_SET_LEN;
+		exp->set |= E_FMT_SET_LEN;
 		exp->len = *(t_fmt_len *)kv->val;
 	}
 	return (NULL == kv ? E_FMT_SYM_NONE : E_FMT_SYM_LEN);

@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 21:20:11 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/27 21:12:56 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/28 21:32:32 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_fmt_sym			parse_fmt_flags(t_fmt_exp *exp, char **fmt)
 
 	edg = fmt;
 	if (NULL != (kv = parse_fmt_tok(&g_flag_map, *fmt, edg)))
-		exp->set |= E_FMT_EXP_SET_FLAGS;
+		exp->set |= E_FMT_SET_FLAGS;
 	while (NULL != kv)
 	{
 		*fmt = *edg;

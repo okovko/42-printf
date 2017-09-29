@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 21:21:50 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/27 21:19:01 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/09/28 18:59:28 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,11 @@ static t_map_kv		g_spec_kvs[] = (t_map_kv[])
 	{(void *)"I", (void *)(t_fmt_spec[]){E_FMT_SPEC_INT}},
 	{(void *)"u", (void *)(t_fmt_spec[]){E_FMT_SPEC_UINT}},
 	{(void *)"U", (void *)(t_fmt_spec[]){E_FMT_SPEC_UINT}},
-	{(void *)"o", (void *)(t_fmt_spec[]){E_FMT_SPEC_OCTAL}},
-	{(void *)"O", (void *)(t_fmt_spec[]){E_FMT_SPEC_OCTAL}},
-	{(void *)"x", (void *)(t_fmt_spec[]){E_FMT_SPEC_HEX}},
-	{(void *)"X", (void *)(t_fmt_spec[]){E_FMT_SPEC_HEX_UPPER}},
+	{(void *)"o", (void *)(t_fmt_spec[]){E_FMT_SPEC_UINT}},
+	{(void *)"O", (void *)(t_fmt_spec[]){E_FMT_SPEC_UINT}},
+	{(void *)"x", (void *)(t_fmt_spec[]){E_FMT_SPEC_UINT}},
+	{(void *)"X", (void *)(t_fmt_spec[]){E_FMT_SPEC_UINT}},
+	{(void *)"p", (void *)(t_fmt_spec[]){E_FMT_SPEC_UINT}},
 	{(void *)"f", (void *)(t_fmt_spec[]){E_FMT_SPEC_FLOAT}},
 	{(void *)"F", (void *)(t_fmt_spec[]){E_FMT_SPEC_FLOAT_UPPER}},
 	{(void *)"e", (void *)(t_fmt_spec[]){E_FMT_SPEC_EXP}},
@@ -36,7 +37,6 @@ static t_map_kv		g_spec_kvs[] = (t_map_kv[])
 	{(void *)"C", (void *)(t_fmt_spec[]){E_FMT_SPEC_CHAR}},
 	{(void *)"s", (void *)(t_fmt_spec[]){E_FMT_SPEC_STR}},
 	{(void *)"S", (void *)(t_fmt_spec[]){E_FMT_SPEC_STR}},
-	{(void *)"p", (void *)(t_fmt_spec[]){E_FMT_SPEC_PTR}},
 	{(void *)"n", (void *)(t_fmt_spec[]){E_FMT_SPEC_N_PTR}},
 	{(void *)"%", (void *)(t_fmt_spec[]){E_FMT_SPEC_PERCENT}},
 };
@@ -47,18 +47,51 @@ static t_map		g_spec_map =
 	.val_sz = sizeof(t_fmt_spec),
 	.kvs = g_spec_kvs,
 };
+static t_map_kv		g_base_kvs[] = (t_map_kv[])
+{
+	{(void *)"u", (void *)(int[]){10}},
+	{(void *)"U", (void *)(int[]){10}},
+	{(void *)"o", (void *)(int[]){8}},
+	{(void *)"O", (void *)(int[]){8}},
+	{(void *)"x", (void *)(int[]){16}},
+	{(void *)"X", (void *)(int[]){16}},
+	{(void *)"p", (void *)(int[]){16}},
+};
+static t_map		g_base_map =
+{
+	.sz = sizeof(g_base_kvs) / sizeof(g_base_kvs[0]),
+	.key_sz = sizeof(char *),
+	.val_sz = sizeof(int),
+	.kvs = g_base_kvs,
+};
+
+static int			parse_base(t_map_kv *kv)
+{
+	t_map_kv	*base_kv;
+	
+	if (NULL != (base_kv = ft_mapget(&g_base_map, (void *)kv->key, ft_strcmp)))
+		return (*(int *)base_kv->val);
+	return (0);
+}
 
 t_fmt_sym			parse_fmt_spec(t_fmt_exp *exp, char **fmt)
 {
 	t_map_kv	*kv;
+	char		cc;
 	char		**edg;
 
 	edg = fmt;
 	if (NULL != (kv = parse_fmt_tok(&g_spec_map, *fmt, edg)))
 	{
 		*fmt = *edg;
-		exp->set |= E_FMT_EXP_SET_SPEC;
+		exp->set |= E_FMT_SET_SPEC;
 		exp->spec = *(t_fmt_spec *)kv->val;
+		exp->base = parse_base(kv);
+		if (exp->base > 0)
+			exp->set |= E_FMT_SET_BASE;
+		cc = *(char *)kv->key;
+		if (ft_isupper(cc))
+			exp->flags |= E_FMT_FLAG_BIT_UPPER;
 	}
 	return (NULL == kv ? E_FMT_SYM_NONE : E_FMT_SYM_SPEC);
 }
