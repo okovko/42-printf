@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/22 15:59:45 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/29 02:18:09 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/10/02 02:33:07 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ int		print_str(t_fmt_exp *exp, va_list ap)
 	arg.p = va_arg(ap, char *);
 	if (NULL == arg.p)
 	{
-		write(1, "(null)", 8);
-		return (8);
+		write(1, "(null)", 7);
+		return (7);
 	}
 	arg.sz = ft_strlen(arg.p);
 	sz = convert_str_pad(exp, arg, &prnt);
