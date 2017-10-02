@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 06:28:39 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/25 05:47:10 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/10/02 04:06:23 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,5 @@ int		print_wint(t_fmt_exp *exp, va_list ap)
 {
 	(void)ap;
 	(void)exp;
-	return(0);
+	return (0);
 }

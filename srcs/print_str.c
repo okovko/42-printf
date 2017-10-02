@@ -39,15 +39,29 @@ static int		convert_str_pad(t_fmt_exp *exp, t_pz ss, char **prnt)
 
 int		print_str(t_fmt_exp *exp, va_list ap)
 {
-	t_pz	arg;
-	int		sz;
-	char	*prnt;
+	t_pz		arg;
+	int			sz;
+	char		*prnt;
+	t_bool		left;
+	const char	nc = '\0';
 
 	arg.p = va_arg(ap, char *);
 	arg.p = NULL == arg.p ? ft_strdup("(null)") : arg.p;
 	arg.sz = ft_strlen(arg.p);
 	sz = convert_str_pad(exp, arg, &prnt);
-	write(1, prnt, sz);
+	left = exp->flags & E_FMT_FLAG_BIT_LEFT_JUSTIFY;
+	if (left)
+	{
+		if ('\0' == *(char *)arg.p)
+			write(1, &nc, 1);
+		write(1, prnt, sz);
+	}
+	else
+	{
+		write(1, prnt, sz);
+		if ('\0' == *(char *)arg.p)
+			write(1, &nc, 1);
+	}
 	free(prnt);
 	return (sz);
 }
