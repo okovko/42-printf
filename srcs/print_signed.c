@@ -51,8 +51,11 @@ static int		convert_signed(t_fmt_exp *exp, long long val, char **conv)
 	char			*ss;
 	char			cc;
 	int				sz;
+	t_bool		no_print_zero;
 
-	sz = val == 0 && exp->prec == 0 ? 0 : ft_diglen(val);
+	no_print_zero = exp->set & E_FMT_SET_PREC
+		&& 0 == exp->prec && 0 == val;
+	sz = no_print_zero ? 0 : ft_diglen(val);
 	sz = MAX(sz, (int)exp->prec);
 	if ((cc = signed_sign(exp, val)))
 		sz++;
