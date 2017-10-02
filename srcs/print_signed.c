@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 06:09:45 by olkovale          #+#    #+#             */
-/*   Updated: 2017/10/02 10:12:17 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/10/02 10:18:06 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include "ft_printf.h"
 
-static char		signed_sign(t_fmt_exp *exp, long long val)
+static void		set_sign(t_fmt_exp *exp, long long val, char *pad, char *nbr)
 {
 	char	cc;
 
@@ -26,7 +26,24 @@ static char		signed_sign(t_fmt_exp *exp, long long val)
 		cc = ' ';
 	else if (exp->flags & E_FMT_FLAG_BIT_FORCE_SIGN)
 		cc = '+';
-	return (cc);
+	if (cc)
+	{
+		if (exp->flags & E_FMT_FLAG_BIT_LEFT_PAD_ZEROES)
+			pad[0] = cc;
+		else
+			nbr[0] = cc;
+	}
+}
+
+static int		prefix_sz(t_fmt_exp *exp, long long val)
+{
+	if (val < 0)
+		return (1);
+	if (exp->flags & E_FMT_FLAG_BIT_SPACE_SIGN)
+		return (1);
+	if (exp->flags & E_FMT_FLAG_BIT_FORCE_SIGN)
+		return (1);
+	return (0);
 }
 
 static char		*convert_signed_helper(char *ss, int sz, long long val)
@@ -49,32 +66,28 @@ static char		*convert_signed_helper(char *ss, int sz, long long val)
 static int		convert_signed(t_fmt_exp *exp, long long val, char **conv)
 {
 	char		*ss;
-	char		cc;
 	int			sz;
 	t_bool		no_print_zero;
 
 	no_print_zero = exp->set & E_FMT_SET_PREC
 		&& 0 == exp->prec && 0 == val;
 	sz = no_print_zero ? 0 : ft_lldiglen(val);
-	sz = MAX(sz, (int)exp->prec);
-	if ((cc = signed_sign(exp, val)))
-		sz++;
+	sz = MAX(sz, (int)exp->prec) + prefix_sz(exp, val);
 	ss = ft_walloc(sz);
 	ss = convert_signed_helper(ss, sz, val);
-	if ('\0' != cc)
-		ss[0] = cc;
 	*conv = ss;
 	return (sz);
 }
 
-int				print_signed(t_fmt_exp *exp, long long arg)
+int				print_signed(t_fmt_exp *exp, long long val)
 {
 	t_pz		pad;
 	t_pz		nbr;
 	t_bool		left;
 
-	nbr.sz = convert_signed(exp, arg, (char **)&nbr.p);
+	nbr.sz = convert_signed(exp, val, (char **)&nbr.p);
 	pad.sz = convert_nbr_pad(exp, nbr.sz, (char **)&pad.p);
+	set_sign(exp, val, pad.p, nbr.p);
 	left = exp->flags & E_FMT_FLAG_BIT_LEFT_JUSTIFY;
 	if (left)
 	{
