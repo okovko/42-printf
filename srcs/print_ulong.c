@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 06:51:39 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/25 05:48:35 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/10/02 07:35:18 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,8 @@
 
 int			print_ulong(t_fmt_exp *exp, va_list ap)
 {
-	return (print_uint(exp, ap));
+	unsigned long	ulong;
+
+	ulong = va_arg(ap, unsigned long);
+	return (print_unsigned(exp, ulong));
 }

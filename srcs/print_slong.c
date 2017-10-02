@@ -14,5 +14,8 @@
 
 int		print_slong(t_fmt_exp *exp, va_list ap)
 {
-	return (print_sint(exp, ap));
+	long	slong;
+
+	slong = va_arg(ap, long);
+	return (print_signed(exp, slong));
 }

@@ -10,11 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
 #include "ft_printf.h"
 
-int		print_sint(t_fmt_exp *exp, va_list ap)
+int			print_sint(t_fmt_exp *exp, va_list ap)
 {
-	return (print_sllong(exp, ap));
+	int		sint;
+
+	sint = va_arg(ap, int);
+	return (print_signed(exp, sint));
 }

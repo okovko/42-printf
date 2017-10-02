@@ -10,11 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
 #include "ft_printf.h"
 
 int			print_uint(t_fmt_exp *exp, va_list ap)
 {
-	return (print_ullong(exp, ap));
+	unsigned	uint;
+
+	uint = va_arg(ap, unsigned);
+	return (print_unsigned(exp, uint));
 }

@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/14 03:44:40 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/29 01:52:36 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/10/02 07:22:46 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,8 @@ int					print_sllong(t_fmt_exp *exp, va_list ap);
 int					print_ullong(t_fmt_exp *exp, va_list ap);
 int					print_ptrdiff(t_fmt_exp *exp, va_list ap);
 int					print_uintmax(t_fmt_exp *exp, va_list ap);
-int					print_ullong_base(t_fmt_exp *exp, int base, va_list ap);
+int					print_signed(t_fmt_exp *exp, long long arg);
+int					print_unsigned(t_fmt_exp *exp, unsigned long long arg);
 int					print_text_until_exp(char **fmt);
 t_fmt_arg_id		parse_fmt_arg_id(t_fmt_exp *exp);
 t_fmt_exp			*parse_fmt_exp(char **fmt, va_list ap);
