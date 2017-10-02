@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 06:09:45 by olkovale          #+#    #+#             */
-/*   Updated: 2017/10/02 02:47:08 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/10/02 06:40:38 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,14 @@ static char		*convert_sllong_helper(char *ss, int sz, long long val)
 
 static int		convert_sllong(t_fmt_exp *exp, long long val, char **conv)
 {
-	char			*ss;
-	char			cc;
-	int				sz;
+	char		*ss;
+	char		cc;
+	int			sz;
+	t_bool		no_print_zero;
 
-	sz = val == 0 && exp->prec == 0 ? 0 : ft_diglen(val);
+	no_print_zero = exp->set & E_FMT_SET_PREC
+		&& 0 == exp->prec && 0 == val;
+	sz = no_print_zero ? 0 : ft_diglen(val);
 	sz = MAX(sz, (int)exp->prec);
 	if ((cc = sllong_sign(exp, val)))
 		sz++;
