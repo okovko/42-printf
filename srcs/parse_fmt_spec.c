@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 21:21:50 by olkovale          #+#    #+#             */
-/*   Updated: 2017/10/02 04:16:40 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/10/02 07:57:41 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static t_map_kv		g_spec_kvs[] = (t_map_kv[])
 	{(void *)"d", (void *)(t_fmt_spec[]){E_FMT_SPEC_INT}},
 	{(void *)"D", (void *)(t_fmt_spec[]){E_FMT_SPEC_INT}},
 	{(void *)"i", (void *)(t_fmt_spec[]){E_FMT_SPEC_INT}},
-	{(void *)"I", (void *)(t_fmt_spec[]){E_FMT_SPEC_INT}},
 	{(void *)"u", (void *)(t_fmt_spec[]){E_FMT_SPEC_UINT}},
 	{(void *)"U", (void *)(t_fmt_spec[]){E_FMT_SPEC_UINT}},
 	{(void *)"o", (void *)(t_fmt_spec[]){E_FMT_SPEC_UINT}},
@@ -74,10 +73,32 @@ static int			parse_base(t_map_kv *kv)
 	return (0);
 }
 
+static void			parse_overrides(t_fmt_exp *exp, t_map_kv *kv, va_list ap)
+{
+	char		cc;
+	void		*ptr;
+	va_list		local_ap;
+
+	cc = *(char *)kv->key;
+	if (ft_isupper(cc))
+		exp->flags |= E_FMT_FLAG_BIT_UPPER;
+	if ('p' == cc)
+	{
+		exp->len = E_FMT_LEN_LLONG;
+		exp->flags |= E_FMT_FLAG_BIT_HASH_OVERLOADED;
+		va_copy(local_ap, ap);
+		ptr = va_arg(local_ap, void *);
+		if (NULL == ptr)
+			exp->flags |= E_FMT_FLAG_BIT_FORCE_NULL_PTR_PREFIX;
+		va_end(local_ap);
+	}
+	if ('D' == cc)
+		exp->len = E_FMT_LEN_LONG;
+}
+
 t_fmt_sym			parse_fmt_spec(t_fmt_exp *exp, char **fmt, va_list ap)
 {
 	t_map_kv	*kv;
-	char		cc;
 	char		*edg;
 
 	(void)ap;
@@ -90,11 +111,7 @@ t_fmt_sym			parse_fmt_spec(t_fmt_exp *exp, char **fmt, va_list ap)
 		exp->base = parse_base(kv);
 		if (exp->base > 0)
 			exp->set |= E_FMT_SET_BASE;
-		cc = *(char *)kv->key;
-		if (ft_isupper(cc))
-			exp->flags |= E_FMT_FLAG_BIT_UPPER;
-		if ('p' == cc)
-			exp->flags |= E_FMT_FLAG_BIT_HASH_OVERLOADED;
+		parse_overrides(exp, kv, ap);
 	}
 	return (NULL == kv ? E_FMT_SYM_END : E_FMT_SYM_SPEC);
 }

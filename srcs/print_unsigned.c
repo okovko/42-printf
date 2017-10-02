@@ -18,10 +18,12 @@
 static int		unsigned_prefix_sz(t_fmt_exp *exp, unsigned long long val)
 {
 	t_bool		prefix;
+	t_bool		force;
 	int			base;
 
 	prefix = exp->flags & E_FMT_FLAG_BIT_HASH_OVERLOADED;
-	if (val == 0 || !prefix)
+	force = exp->flags & E_FMT_FLAG_BIT_FORCE_NULL_PTR_PREFIX;
+	if (!force && (val == 0 || !prefix))
 		return (0);
 	base = exp->base;
 	if (base == 8)
@@ -36,18 +38,18 @@ static char		*unsigned_prefix(char *ss, t_fmt_exp *exp,
 {
 	t_bool		prefix;
 	t_bool		upper;
+	t_bool		force;
 	int			base;
 	
 	prefix = exp->flags & E_FMT_FLAG_BIT_HASH_OVERLOADED;
-	if (val == 0 || !prefix)
+	force = exp->flags & E_FMT_FLAG_BIT_FORCE_NULL_PTR_PREFIX;
+	if (!force && (val == 0 || !prefix))
 		return (ss);
 	base = exp->base;
 	upper = exp->flags & E_FMT_FLAG_BIT_UPPER;
 	if (base == 8)
-	{
 		ss[0] = '0';
-	}
-	else if (base == 16 && upper)
+	if (base == 16 && upper)
 	{
 		ss[0] = '0';
 		ss[1] = 'X';
@@ -97,7 +99,7 @@ static int		convert_unsigned(t_fmt_exp *exp, unsigned long long val,
 
 	no_print_zero = exp->set & E_FMT_SET_PREC
 		&& 0 == exp->prec && 0 == val;
-	sz = no_print_zero ? 0 : ft_udiglen(val);
+	sz = no_print_zero ? 0 : ft_lludiglen(val, exp->base);
 	sz = MAX(sz, (int)exp->prec) + unsigned_prefix_sz(exp, val);
 	ss = ft_walloc(sz);
 	ss = convert_unsigned_helper(exp, ss, sz, val);

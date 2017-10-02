@@ -40,6 +40,7 @@ typedef enum		e_fmt_flag_bit
 	E_FMT_FLAG_BIT_HASH_OVERLOADED = BIT_FLAG(4),
 	E_FMT_FLAG_BIT_LEFT_PAD_ZEROES = BIT_FLAG(5),
 	E_FMT_FLAG_BIT_UPPER = BIT_FLAG(6),
+	E_FMT_FLAG_BIT_FORCE_NULL_PTR_PREFIX = BIT_FLAG(7),
 }					t_fmt_flag_bit;
 
 typedef enum		e_fmt_width

@@ -55,7 +55,7 @@ static int		convert_signed(t_fmt_exp *exp, long long val, char **conv)
 
 	no_print_zero = exp->set & E_FMT_SET_PREC
 		&& 0 == exp->prec && 0 == val;
-	sz = no_print_zero ? 0 : ft_diglen(val);
+	sz = no_print_zero ? 0 : ft_lldiglen(val);
 	sz = MAX(sz, (int)exp->prec);
 	if ((cc = signed_sign(exp, val)))
 		sz++;

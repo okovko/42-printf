@@ -6,13 +6,13 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 06:07:06 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/23 22:53:18 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/10/02 08:19:30 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-unsigned long		ft_ludiglen(unsigned long val)
+unsigned long		ft_ludiglen(unsigned long val, int base)
 {
 	unsigned long		sz;
 
@@ -20,7 +20,7 @@ unsigned long		ft_ludiglen(unsigned long val)
 	while (val)
 	{
 		sz++;
-		val /= 10;
+		val /= base;
 	}
 	return (sz);
 }

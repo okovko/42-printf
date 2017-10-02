@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 06:07:40 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/23 22:53:07 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/10/02 08:19:03 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include "libft.h"
 
-unsigned long long		ft_lludiglen(unsigned long long val)
+unsigned long long		ft_lludiglen(unsigned long long val, int base)
 {
 	int		sz;
 
@@ -22,7 +22,7 @@ unsigned long long		ft_lludiglen(unsigned long long val)
 	while (val)
 	{
 		sz++;
-		val /= 10;
+		val /= base;
 	}
 	return (sz);
 }

@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 11:29:19 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/28 21:43:49 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/10/02 08:20:17 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,9 +134,9 @@ int					ft_nbrlen(int val);
 int					ft_diglen(int val);
 long				ft_ldiglen(long val);
 long long			ft_lldiglen(long long val);
-unsigned			ft_udiglen(unsigned val);
-unsigned long		ft_ludiglen(unsigned long val);
-unsigned long long	ft_lludiglen(unsigned long long val);
+unsigned			ft_udiglen(unsigned val, int base);
+unsigned long		ft_ludiglen(unsigned long val, int base);
+unsigned long long	ft_lludiglen(unsigned long long val, int base);
 char				*ft_strrev(char *ss);
 t_lst				*ft_lstsrev(t_lst **beg);
 t_lst				*ft_lstnode(void const *dat, int sz);
