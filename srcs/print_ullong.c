@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 06:17:33 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/28 21:28:26 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/10/02 06:49:43 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,13 @@ static char		*convert_ullong_helper(t_fmt_exp *exp, char *ss, int sz,
 static int		convert_ullong(t_fmt_exp *exp, unsigned long long val,
 									char **conv)
 {
-	char			*ss;
-	int				sz;
+	char		*ss;
+	int			sz;
+	t_bool		no_print_zero;
 
-	sz = val == 0 && exp->prec == 0 ? 0 : ft_udiglen(val);
+	no_print_zero = exp->set & E_FMT_SET_PREC
+		&& 0 == exp->prec && 0 == val;
+	sz = no_print_zero ? 0 : ft_udiglen(val);
 	sz = MAX(sz, (int)exp->prec) + ullong_prefix_sz(exp, val);
 	ss = ft_walloc(sz);
 	ss = convert_ullong_helper(exp, ss, sz, val);
