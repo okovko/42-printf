@@ -97,7 +97,7 @@ static t_fmt_exp		g_exp_char =
 	.spec = E_FMT_SPEC_CHAR,
 	.len = E_FMT_LEN_NONE
 };
-static t_fmt_exp		g_exp_wint =
+static t_fmt_exp		g_exp_wchar =
 {
 	.spec = E_FMT_SPEC_CHAR,
 	.len = E_FMT_LEN_LONG
@@ -136,7 +136,7 @@ static t_map_kv			g_arg_kvs[] =
 	{(void *)&g_exp_usize, (void *)(t_fmt_arg_id[]){E_FMT_ARG_ID_SIZE}},
 	{(void *)&g_exp_uptrdiff, (void *)(t_fmt_arg_id[]){E_FMT_ARG_ID_PTRDIFF}},
 	{(void *)&g_exp_char, (void *)(t_fmt_arg_id[]){E_FMT_ARG_ID_CHAR}},
-	{(void *)&g_exp_wint, (void *)(t_fmt_arg_id[]){E_FMT_ARG_ID_WINT}},
+	{(void *)&g_exp_wchar, (void *)(t_fmt_arg_id[]){E_FMT_ARG_ID_WCHAR}},
 	{(void *)&g_exp_str, (void *)(t_fmt_arg_id[]){E_FMT_ARG_ID_STR}},
 	{(void *)&g_exp_wstr, (void *)(t_fmt_arg_id[]){E_FMT_ARG_ID_WSTR}},
 	{(void *)&g_exp_ptr, (void *)(t_fmt_arg_id[]){E_FMT_ARG_ID_PTR}},

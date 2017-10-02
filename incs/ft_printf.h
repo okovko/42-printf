@@ -97,7 +97,7 @@ typedef enum		e_fmt_arg_id
 	E_FMT_ARG_ID_SCHAR,
 	E_FMT_ARG_ID_UCHAR,
 	E_FMT_ARG_ID_CHAR,
-	E_FMT_ARG_ID_WINT,
+	E_FMT_ARG_ID_WCHAR,
 	E_FMT_ARG_ID_SSHRT,
 	E_FMT_ARG_ID_USHRT,
 	E_FMT_ARG_ID_SINT,
@@ -159,7 +159,7 @@ int					print_char(t_fmt_exp *exp, va_list ap);
 int					print_sint(t_fmt_exp *exp, va_list ap);
 int					print_size(t_fmt_exp *exp, va_list ap);
 int					print_uint(t_fmt_exp *exp, va_list ap);
-int					print_wint(t_fmt_exp *exp, va_list ap);
+int					print_wchar(t_fmt_exp *exp, va_list ap);
 int					print_wstr(t_fmt_exp *exp, va_list ap);
 int					print_schar(t_fmt_exp *exp, va_list ap);
 int					print_slong(t_fmt_exp *exp, va_list ap);
