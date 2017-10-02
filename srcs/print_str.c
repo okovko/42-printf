@@ -44,11 +44,7 @@ int		print_str(t_fmt_exp *exp, va_list ap)
 	char	*prnt;
 
 	arg.p = va_arg(ap, char *);
-	if (NULL == arg.p)
-	{
-		write(1, "(null)", 7);
-		return (7);
-	}
+	arg.p = NULL == arg.p ? ft_strdup("(null)") : arg.p;
 	arg.sz = ft_strlen(arg.p);
 	sz = convert_str_pad(exp, arg, &prnt);
 	write(1, prnt, sz);
