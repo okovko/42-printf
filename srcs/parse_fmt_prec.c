@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 21:21:05 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/29 02:37:44 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/10/02 17:25:38 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 static t_map_kv		g_prec_kvs[] = (t_map_kv[])
 {
-	{(void *)".*", (void *)(t_fmt_prec[]){E_FMT_PREC_BEFORE}},
-	{(void *)".", (void *)(t_fmt_prec[]){E_FMT_PREC_NONE}},
+	{(void *)".*", (void *)(int[]){E_FMT_PREC_BEFORE}},
+	{(void *)".", (void *)(int[]){E_FMT_PREC_NONE}},
 };
 static t_map		g_prec_map =
 {
 	.sz = sizeof(g_prec_kvs) / sizeof(g_prec_kvs[0]),
 	.key_sz = sizeof(char *),
-	.val_sz = sizeof(t_fmt_prec),
+	.val_sz = sizeof(int),
 	.kvs = g_prec_kvs,
 };
 
@@ -35,7 +35,7 @@ t_fmt_sym			parse_fmt_prec(t_fmt_exp *exp, char **fmt, va_list ap)
 	{
 		*fmt = edg;
 		exp->set |= E_FMT_SET_PREC;
-		exp->prec = *(t_fmt_prec *)kv->val;
+		exp->prec = *(int *)kv->val;
 		if (E_FMT_PREC_BEFORE == exp->prec)
 			exp->prec = va_arg(ap, long long);
 		if (E_FMT_PREC_NONE != exp->prec)

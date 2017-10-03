@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 21:21:50 by olkovale          #+#    #+#             */
-/*   Updated: 2017/10/02 11:00:26 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/10/02 17:19:47 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,30 @@
 
 static t_map_kv		g_spec_kvs[] = (t_map_kv[])
 {
-	{(void *)"d", (void *)(t_fmt_spec[]){E_FMT_SPEC_INT}},
-	{(void *)"D", (void *)(t_fmt_spec[]){E_FMT_SPEC_INT}},
-	{(void *)"i", (void *)(t_fmt_spec[]){E_FMT_SPEC_INT}},
-	{(void *)"u", (void *)(t_fmt_spec[]){E_FMT_SPEC_UINT}},
-	{(void *)"U", (void *)(t_fmt_spec[]){E_FMT_SPEC_UINT}},
-	{(void *)"o", (void *)(t_fmt_spec[]){E_FMT_SPEC_UINT}},
-	{(void *)"O", (void *)(t_fmt_spec[]){E_FMT_SPEC_UINT}},
-	{(void *)"x", (void *)(t_fmt_spec[]){E_FMT_SPEC_UINT}},
-	{(void *)"X", (void *)(t_fmt_spec[]){E_FMT_SPEC_UINT}},
-	{(void *)"p", (void *)(t_fmt_spec[]){E_FMT_SPEC_UINT}},
-	{(void *)"f", (void *)(t_fmt_spec[]){E_FMT_SPEC_FLOAT}},
-	{(void *)"F", (void *)(t_fmt_spec[]){E_FMT_SPEC_FLOAT_UPPER}},
-	{(void *)"e", (void *)(t_fmt_spec[]){E_FMT_SPEC_EXP}},
-	{(void *)"E", (void *)(t_fmt_spec[]){E_FMT_SPEC_EXP_UPPER}},
-	{(void *)"g", (void *)(t_fmt_spec[]){E_FMT_SPEC_FLOAT_OR_EXP}},
-	{(void *)"G", (void *)(t_fmt_spec[]){E_FMT_SPEC_FLOAT_OR_EXP_UPPER}},
-	{(void *)"a", (void *)(t_fmt_spec[]){E_FMT_SPEC_HEX_FLOAT}},
-	{(void *)"A", (void *)(t_fmt_spec[]){E_FMT_SPEC_HEX_FLOAT_UPPER}},
-	{(void *)"c", (void *)(t_fmt_spec[]){E_FMT_SPEC_CHAR}},
-	{(void *)"C", (void *)(t_fmt_spec[]){E_FMT_SPEC_CHAR}},
-	{(void *)"s", (void *)(t_fmt_spec[]){E_FMT_SPEC_STR}},
-	{(void *)"S", (void *)(t_fmt_spec[]){E_FMT_SPEC_STR}},
-	{(void *)"n", (void *)(t_fmt_spec[]){E_FMT_SPEC_N_PTR}},
-	{(void *)"%", (void *)(t_fmt_spec[]){E_FMT_SPEC_PERCENT}},
+	{(void *)"d", (void *)(int[]){E_FMT_SPEC_INT}},
+	{(void *)"D", (void *)(int[]){E_FMT_SPEC_INT}},
+	{(void *)"i", (void *)(int[]){E_FMT_SPEC_INT}},
+	{(void *)"u", (void *)(int[]){E_FMT_SPEC_UINT}},
+	{(void *)"U", (void *)(int[]){E_FMT_SPEC_UINT}},
+	{(void *)"o", (void *)(int[]){E_FMT_SPEC_UINT}},
+	{(void *)"O", (void *)(int[]){E_FMT_SPEC_UINT}},
+	{(void *)"x", (void *)(int[]){E_FMT_SPEC_UINT}},
+	{(void *)"X", (void *)(int[]){E_FMT_SPEC_UINT}},
+	{(void *)"p", (void *)(int[]){E_FMT_SPEC_UINT}},
+	{(void *)"f", (void *)(int[]){E_FMT_SPEC_FLOAT}},
+	{(void *)"F", (void *)(int[]){E_FMT_SPEC_FLOAT_UPPER}},
+	{(void *)"e", (void *)(int[]){E_FMT_SPEC_EXP}},
+	{(void *)"E", (void *)(int[]){E_FMT_SPEC_EXP_UPPER}},
+	{(void *)"g", (void *)(int[]){E_FMT_SPEC_FLOAT_OR_EXP}},
+	{(void *)"G", (void *)(int[]){E_FMT_SPEC_FLOAT_OR_EXP_UPPER}},
+	{(void *)"a", (void *)(int[]){E_FMT_SPEC_HEX_FLOAT}},
+	{(void *)"A", (void *)(int[]){E_FMT_SPEC_HEX_FLOAT_UPPER}},
+	{(void *)"c", (void *)(int[]){E_FMT_SPEC_CHAR}},
+	{(void *)"C", (void *)(int[]){E_FMT_SPEC_CHAR}},
+	{(void *)"s", (void *)(int[]){E_FMT_SPEC_STR}},
+	{(void *)"S", (void *)(int[]){E_FMT_SPEC_STR}},
+	{(void *)"n", (void *)(int[]){E_FMT_SPEC_N_PTR}},
+	{(void *)"%", (void *)(int[]){E_FMT_SPEC_PERCENT}},
 };
 static t_map		g_spec_map =
 {
@@ -67,7 +67,7 @@ static t_map		g_base_map =
 static int			parse_base(t_map_kv *kv)
 {
 	t_map_kv	*base_kv;
-	
+
 	if (NULL != (base_kv = ft_mapget(&g_base_map, (void *)kv->key, ft_strcmp)))
 		return (*(int *)base_kv->val);
 	return (0);

@@ -14,20 +14,20 @@
 
 static t_map_kv		g_len_kvs[] = (t_map_kv[])
 {
-	{(void *)"hh", (void *)(t_fmt_len[]){E_FMT_LEN_CHAR}},
-	{(void *)"h", (void *)(t_fmt_len[]){E_FMT_LEN_SHRT}},
-	{(void *)"ll", (void *)(t_fmt_len[]){E_FMT_LEN_LLONG}},
-	{(void *)"l", (void *)(t_fmt_len[]){E_FMT_LEN_LONG}},
-	{(void *)"j", (void *)(t_fmt_len[]){E_FMT_LEN_INTMAX}},
-	{(void *)"z", (void *)(t_fmt_len[]){E_FMT_LEN_SIZE}},
-	{(void *)"t", (void *)(t_fmt_len[]){E_FMT_LEN_PTRDIFF}},
-	{(void *)"L", (void *)(t_fmt_len[]){E_FMT_LEN_LONG_DOUBLE}},
+	{(void *)"hh", (void *)(int[]){E_FMT_LEN_CHAR}},
+	{(void *)"h", (void *)(int[]){E_FMT_LEN_SHRT}},
+	{(void *)"ll", (void *)(int[]){E_FMT_LEN_LLONG}},
+	{(void *)"l", (void *)(int[]){E_FMT_LEN_LONG}},
+	{(void *)"j", (void *)(int[]){E_FMT_LEN_INTMAX}},
+	{(void *)"z", (void *)(int[]){E_FMT_LEN_SIZE}},
+	{(void *)"t", (void *)(int[]){E_FMT_LEN_PTRDIFF}},
+	{(void *)"L", (void *)(int[]){E_FMT_LEN_LONG_DOUBLE}},
 };
 static t_map		g_len_map =
 {
 	.sz = sizeof(g_len_kvs) / sizeof(g_len_kvs[0]),
 	.key_sz = sizeof(char *),
-	.val_sz = sizeof(t_fmt_len),
+	.val_sz = sizeof(int),
 	.kvs = g_len_kvs,
 };
 
@@ -42,7 +42,7 @@ t_fmt_sym			parse_fmt_len(t_fmt_exp *exp, char **fmt, va_list ap)
 	{
 		*fmt = edg;
 		exp->set |= E_FMT_SET_LEN;
-		exp->len = *(t_fmt_len *)kv->val;
+		exp->len = *(int *)kv->val;
 	}
 	return (NULL == kv ? E_FMT_SYM_NONE : E_FMT_SYM_LEN);
 }
