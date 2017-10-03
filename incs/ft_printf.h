@@ -13,12 +13,12 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-#include <stdarg.h>
-#include <stddef.h>
-#include <stdint.h>
-#include <wchar.h>
+# include <stdarg.h>
+# include <stddef.h>
+# include <stdint.h>
+# include <wchar.h>
 
-#include "libft.h"
+# include "libft.h"
 
 typedef enum		e_fmt_sym
 {
