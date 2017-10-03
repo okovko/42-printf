@@ -6,21 +6,14 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/14 03:43:23 by olkovale          #+#    #+#             */
-/*   Updated: 2017/10/02 06:31:09 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/10/02 14:29:52 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/*
-	specifiers left to implement: S, C, p
-*/
 
 #include <stdarg.h>
 
 #include "ft_printf.h"
 
-/*
-	better to count exps by using the spec map
-*/
 static int			count_exps(const char *fmt)
 {
 	int		ii;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_wchar.c                                       :+:      :+:    :+:   */
+/*   print_wchar.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/21 06:28:39 by olkovale          #+#    #+#             */
-/*   Updated: 2017/10/02 10:44:50 by olkovale         ###   ########.fr       */
+/*   Created: 2017/10/02 14:30:34 by olkovale          #+#    #+#             */
+/*   Updated: 2017/10/02 14:30:34 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,60 @@
 
 #include "ft_printf.h"
 
-int		print_wchar(t_fmt_exp *exp, va_list ap)
+static int	print_str_indirect(t_fmt_exp *exp, ...)
 {
-	/*
+	va_list		ap;
+
+	va_start(ap, exp);
+	return (print_str(exp, ap));
+}
+
+static int	count_wchar(wchar_t wc)
+{
+	if (wc <= 0x7F)
+		return (1);
+	else if (wc <= 0x7FF)
+		return (2);
+	else if (wc <= 0xFFFF)
+		return (3);
+	else if (wc <= 0x10FFFF)
+		return (4);
+	return (0);
+}
+
+static int	convert_wchar(char *u8, wchar_t wc)
+{
+	if (wc <= 0x7F)
+		u8[0] = wc;
+	else if (wc <= 0x7FF)
+	{
+		u8[0] = 0xC0 | (wc >> 6);
+		u8[1] = 0x80 | (wc & 0x3F);
+	}
+	else if (wc <= 0xFFFF)
+	{
+		u8[0] = 0xE0 | (wc >> 12);
+		u8[1] = 0x80 | ((wc >> 6) & 0x3F) + 0x80;
+		u8[2] = 0x80 | (wc & 0x3F);
+	}
+	else if (wc <= 0x10FFFF)
+	{
+		u8[0] = 0xF0 | (wc >> 18);
+		u8[1] = 0x80 | ((wc >> 12) & 0x3F);
+		u8[2] = 0x80 | ((wc >> 6) & 0x3F);
+		u8[3] = 0x80 | (wc & 0x3F);
+	}
+	return (count_wchar(wc));
+}
+
+int			print_wchar(t_fmt_exp *exp, va_list ap)
+{
+	char		u8[4];
 	wchar_t		wc;
 	int			sz;
 
-	wc = va_arg(ap, wchar_t);
-	sz = wc <= 0x7F;
-	sz += wc <= 0x7FF;
-	sz += wc <= 0xFFFF;
-	sz += wc <= 0x10FFFF;
-	*/
-	(void)ap;
-	(void)exp;
-	return (0);
+	wc = va_arg(ap, wint_t);
+	sz = convert_wchar(u8, wc);
+	print_str_indirect(exp, u8);
+	return (sz);
 }
