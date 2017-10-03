@@ -37,7 +37,7 @@ static int		convert_str_pad(t_fmt_exp *exp, t_pz ss, char **prnt)
 	return (sz);
 }
 
-int		print_str(t_fmt_exp *exp, va_list ap)
+int				print_str(t_fmt_exp *exp, va_list ap)
 {
 	t_pz		arg;
 	int			sz;

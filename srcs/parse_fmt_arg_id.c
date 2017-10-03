@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 21:22:40 by olkovale          #+#    #+#             */
-/*   Updated: 2017/10/02 08:06:11 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/10/02 17:15:55 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ static t_map			g_arg_map =
 	.kvs = g_arg_kvs,
 };
 
-static int			map_keycmp_exp_spec_len(void *key, void *itr, int sz)
+static int				map_keycmp_exp_spec_len(void *key, void *itr, int sz)
 {
 	t_fmt_exp		*key_exp;
 	t_fmt_exp		*key_itr;
@@ -162,7 +162,7 @@ static int			map_keycmp_exp_spec_len(void *key, void *itr, int sz)
 	return (-1);
 }
 
-t_fmt_arg_id		parse_fmt_arg_id(t_fmt_exp *exp)
+t_fmt_arg_id			parse_fmt_arg_id(t_fmt_exp *exp)
 {
 	t_map_kv		*kv;
 	t_fmt_arg_id	id;

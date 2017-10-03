@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_unsigned.c                                     :+:      :+:    :+:   */
+/*   print_unsigned.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/23 06:17:33 by olkovale          #+#    #+#             */
-/*   Updated: 2017/10/02 06:49:43 by olkovale         ###   ########.fr       */
+/*   Created: 2017/10/02 17:17:14 by olkovale          #+#    #+#             */
+/*   Updated: 2017/10/02 17:17:14 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ static int		unsigned_prefix_sz(t_fmt_exp *exp, unsigned long long val)
 }
 
 static char		*unsigned_prefix(char *ss, t_fmt_exp *exp,
-							   unsigned long long val)
+									unsigned long long val)
 {
 	t_bool		prefix;
 	t_bool		upper;
 	t_bool		force;
 	int			base;
-	
+
 	prefix = exp->flags & E_FMT_FLAG_BIT_HASH_OVERLOADED;
 	force = exp->flags & E_FMT_FLAG_BIT_FORCE_NULL_PTR_PREFIX;
 	if (!force && (val == 0 || !prefix))
@@ -62,8 +62,8 @@ static char		*unsigned_prefix(char *ss, t_fmt_exp *exp,
 	return (ss);
 }
 
-static char		*convert_unsigned_helper(t_fmt_exp *exp, char *ss, int sz,
-										unsigned long long val)
+static char		*convert_unsigned_helper(t_fmt_exp *exp, char *ss,
+											int sz, unsigned long long val)
 {
 	const char	*digs_lower = "0123456789abcdef";
 	const char	*digs_upper = "0123456789ABCDEF";
@@ -108,7 +108,7 @@ static int		convert_unsigned(t_fmt_exp *exp, unsigned long long val,
 	return (sz);
 }
 
-int			print_unsigned(t_fmt_exp *exp, unsigned long long arg)
+int				print_unsigned(t_fmt_exp *exp, unsigned long long arg)
 {
 	t_pz		pad;
 	t_pz		nbr;
