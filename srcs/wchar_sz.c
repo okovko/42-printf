@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_char.c                                       :+:      :+:    :+:   */
+/*   wchar_sz.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/08 19:46:46 by olkovale          #+#    #+#             */
-/*   Updated: 2017/10/02 14:34:06 by olkovale         ###   ########.fr       */
+/*   Created: 2017/10/02 17:09:30 by olkovale          #+#    #+#             */
+/*   Updated: 2017/10/02 17:09:30 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdlib.h>
-
 #include "ft_printf.h"
 
-int			print_char(t_fmt_exp *exp, va_list ap)
+int		wchar_sz(wchar_t wc)
 {
-	int		cc;
-	char	ss[2];
-
-	cc = va_arg(ap, int);
-	ss[0] = cc;
-	ss[1] = '\0';
-	return (print_str_indirect(exp, ss));
+	if (wc <= 0x7F)
+		return (1);
+	else if (wc <= 0x7FF)
+		return (2);
+	else if (wc <= 0xFFFF)
+		return (3);
+	else if (wc <= 0x10FFFF)
+		return (4);
+	return (0);
 }

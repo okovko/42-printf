@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/14 03:44:40 by olkovale          #+#    #+#             */
-/*   Updated: 2017/10/02 07:22:46 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/10/02 17:06:39 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,7 @@ int					print_arg(char **fmt, va_list ap);
 int					print_nothing(t_fmt_exp *exp, va_list ap);
 int					print_ptr(t_fmt_exp *exp, va_list ap);
 int					print_str(t_fmt_exp *exp, va_list ap);
+int					print_str_indirect(t_fmt_exp *exp, ...);
 int					print_char(t_fmt_exp *exp, va_list ap);
 int					print_sint(t_fmt_exp *exp, va_list ap);
 int					print_size(t_fmt_exp *exp, va_list ap);
@@ -187,5 +188,7 @@ t_fmt_sym			parse_fmt_flags(t_fmt_exp *exp, char **fmt, va_list ap);
 t_fmt_sym			parse_fmt_width(t_fmt_exp *exp, char **fmt, va_list ap);
 t_fmt_sym			parse_fmt_len(t_fmt_exp *exp, char **fmt, va_list ap);
 int					convert_nbr_pad(t_fmt_exp *exp, int sz, char **conv);
+int					wchar_sz(wchar_t wc);
+int					convert_wchar(char *u8, wchar_t wc);
 
 #endif

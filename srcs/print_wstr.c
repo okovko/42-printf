@@ -14,52 +14,6 @@
 
 #include "ft_printf.h"
 
-static int	print_str_indirect(t_fmt_exp *exp, ...)
-{
-	va_list		ap;
-
-	va_start(ap, exp);
-	return (print_str(exp, ap));
-}
-
-static int	count_wchar(wchar_t wc)
-{
-	if (wc <= 0x7F)
-		return (1);
-	else if (wc <= 0x7FF)
-		return (2);
-	else if (wc <= 0xFFFF)
-		return (3);
-	else if (wc <= 0x10FFFF)
-		return (4);
-	return (0);
-}
-
-static int	convert_wchar(char *u8, wchar_t wc)
-{
-	if (wc <= 0x7F)
-		u8[0] = wc;
-	else if (wc <= 0x7FF)
-	{
-		u8[0] = 0xC0 | (wc >> 6);
-		u8[1] = 0x80 | (wc & 0x3F);
-	}
-	else if (wc <= 0xFFFF)
-	{
-		u8[0] = 0xE0 | (wc >> 12);
-		u8[1] = 0x80 | ((wc >> 6) & 0x3F) + 0x80;
-		u8[2] = 0x80 | (wc & 0x3F);
-	}
-	else if (wc <= 0x10FFFF)
-	{
-		u8[0] = 0xF0 | (wc >> 18);
-		u8[1] = 0x80 | ((wc >> 12) & 0x3F);
-		u8[2] = 0x80 | ((wc >> 6) & 0x3F);
-		u8[3] = 0x80 | (wc & 0x3F);
-	}
-	return (count_wchar(wc));
-}
-
 int		print_wstr(t_fmt_exp *exp, va_list ap)
 {
 	char		*u8;
@@ -74,7 +28,7 @@ int		print_wstr(t_fmt_exp *exp, va_list ap)
 	beg = ws;
 	sz = 0;
 	while ('\0' != *ws)
-		sz += count_wchar(*ws++);
+		sz += wchar_sz(*ws++);
 	u8 = ft_walloc(sz + 1);
 	u8[sz] = '\0';
 	ws = beg;
