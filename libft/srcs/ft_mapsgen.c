@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/17 19:53:18 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/21 02:24:26 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/10/02 17:14:25 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,6 @@
 
 t_map	*ft_mapsgen(t_map *map, void *keys, void *vals)
 {
-	/*
-	t_map_kv	*iter;
-	t_map_kv	*end;
-
-	NULLCHECK(map, keys, vals);
-	map->kvs = malloc(sizeof(*iter) * map->sz);
-	CHKALLOC(map->kvs);
-	iter = map->kvs;
-	end = iter + map->sz;
-	while (iter < end)
-	{
-		iter->key = keys;
-		iter->val = vals;
-		keys += map->key_sz;
-		vals += map->val_sz;
-		iter++;
-	}
-	return (map);
-	*/
 	(void)map;
 	(void)keys;
 	(void)vals;

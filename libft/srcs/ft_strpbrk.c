@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/06 13:07:00 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/11 16:22:38 by oleg             ###   ########.fr       */
+/*   Updated: 2017/10/02 17:13:46 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*ft_strpbrk(const char *ss, const char *dlm)
 {
 	char	cc;
-	
+
 	if (NULL == ss || NULL == dlm)
 		return (NULL);
 	while ((cc = *ss))

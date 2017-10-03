@@ -6,7 +6,7 @@
 /*   By: olkovale <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/22 17:53:08 by olkovale          #+#    #+#             */
-/*   Updated: 2017/09/22 17:53:08 by olkovale         ###   ########.fr       */
+/*   Updated: 2017/10/02 17:13:33 by olkovale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	*ft_walloc(int sz)
 {
 	void	*mm;
-	
+
 	if (sz < 0)
 		exit(EXIT_FAILURE);
 	if (NULL == (mm = malloc(sz)))
